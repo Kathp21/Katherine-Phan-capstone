@@ -1,13 +1,14 @@
 
 import './App.css';
-import Testing from './component/Testing/testing';
+import Header from './component/Header/Header';
 
 function App() {
   return (
     <div className="App">
-      <Testing/>
+      <Header/>
     </div>
   );
 }
 
 export default App;
+ 
