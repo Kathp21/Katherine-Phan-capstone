@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "Avenir";
+    src:url("../../assets/fonts/AvenirNextLTPro.woff2") format("woff2"),
+        url("../../assets/fonts/AvenirNextLTPro.woff") format("woff"),
+        url("../../assets/fonts/AvenirNextLTPro.ttf") format("truetype");
+        font-weight: 400;
+}
+
+@font-face {
+    font-family: "Avenir";
+    src:url("../../assets/fonts/AvenirNextLTProBold.woff2") format("woff2"),
+        url("../../assets/fonts/AvenirNextLTProBold.woff") format("woff"),
+        url("../../assets/fonts/AvenirNextLTProBold.ttf") format("truetype");
+        font-weight: 600;
+}

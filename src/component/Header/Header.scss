@@ -2,10 +2,17 @@
 @use '../../styles/partials/mixins' as *;
 
 .header {
-    background-color: #232940;
+    background-color: $graphite;
     
     &__container {
         padding: 0 1rem;
+
+        @include tablet {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
     }
 
     &__logo-container {
@@ -21,7 +28,7 @@
     }
 
     &__web-title{
-        color: white;
+        color:$white;
         font-weight: 700;
         font-size: 1.2rem;
     }
@@ -30,10 +37,16 @@
         display: flex;
         justify-content: space-between;
         padding-bottom: 1rem;
+
+        @include tablet {
+            padding-bottom: 0;
+            flex: 0.5;
+            gap: 2rem;
+        }
     }
 
     &__active-nav-link {
-        background: #13182C;
+        background: $instock-black;
         height: 2.25rem;
         display: flex;
         align-items: center;
@@ -52,7 +65,7 @@
     }
 
     &__title {
-        color: white;
+        color: $white;
     }
 
 }

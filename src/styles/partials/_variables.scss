@@ -1,0 +1,17 @@
+@use './typography' as *;
+
+$main-typeface: "Avenir", Arial, Helvetica, sans-serif;
+
+//COLORS
+
+$white: white;
+$instock-black: #13182C;
+
+// BACKGROUND
+$graphite: #232940;
+$light-grey: #F7F8F9;
+
+// MEDIA QUERIES
+
+$tablet-breakpoint: 47.938rem; /* 767px */
+$desktop-breakpoint: 80rem; /* 1280px */
