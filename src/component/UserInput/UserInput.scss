@@ -1,0 +1,18 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+// .user-input {
+
+//     &__trip-info {
+//         @include form-style;
+//     }
+
+// }
+
+#tripDestination {
+    @include form-style;
+}
+
+#tripDuration {
+    @include form-style;
+}

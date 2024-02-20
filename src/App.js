@@ -1,12 +1,16 @@
-
-import './App.css';
+import './App.scss';
 import Header from './component/Header/Header';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import UserInput from './component/UserInput/UserInput';
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
       <Header/>
-    </div>
+      <Routes>
+        <Route path='/' element={<UserInput/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

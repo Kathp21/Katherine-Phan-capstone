@@ -1,0 +1,14 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+button {
+    height: $btn-height;
+    background-color: $instock-indigo;
+    border-radius: $border-radius;
+    border: none;
+    color: $white;
+
+    &:hover {
+        background-color: $graphite;
+    }
+}

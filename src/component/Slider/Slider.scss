@@ -1,0 +1,40 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+
+  
+option {
+padding: 0;
+}
+
+.slider {
+
+    &__container {
+        position: relative;
+    }
+    
+    &__value {
+        position: absolute;
+        background: $instock-indigo; 
+        color: white;
+        padding: 0.3rem;
+        border-radius: 20px;
+        transform: translateX(-50%);
+    }
+
+    &__value-range {
+        display: flex;
+        justify-content: space-between;
+      }
+}
+
+
+#budget {
+    --webkit-appearance: none;
+    width: 100%;
+    margin: 2rem 0 0.5rem 0;
+
+    &:focus {
+        outline: none;
+    }
+}
