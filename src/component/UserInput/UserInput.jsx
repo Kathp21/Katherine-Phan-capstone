@@ -26,14 +26,11 @@ function UserInput() {
     const interests = ['Cusine', 'Adventures', 'Nature', 'culture']
 
     const handleInterestClick = (interest) => {
-        setSelectedInterests((currentSelectedInterests) => {
-            const index = currentSelectedInterests.indexOf(interest);
-            if (index === -1) {
-                return [...currentSelectedInterests, interest];
-            } else {
-                return currentSelectedInterests.filter((i) => i !== interest);
-            }
-        });
+        if (selectedInterests.includes(interest)) {
+            setSelectedInterests(selectedInterests.filter(indInterest => indInterest == interest))
+        } else {
+            return setSelectedInterests([...selectedInterests, interest])
+        }
     };
     
       
@@ -104,10 +101,11 @@ function UserInput() {
                             <Button key={interest}
                                 onClick={() => handleInterestClick(interest)}
                                 label={interest}
-                                style={{
-                                    // backgroundColor: selectedInterests.includes(interest) ? 'selected' : '',
-                                    backgroundColor: selectedInterests === interest ? 'selected' : '',
-                                }}
+                                // style={{
+                                //     // backgroundColor: selectedInterests.includes(interest) ? 'selected' : '',
+                                //     backgroundColor: selectedInterests === interest ? 'selected' : '',
+                                // }}
+                                variant={`${selectedInterests.includes(interest) ? 'selected' : 'not-selected'}`}
                             >
                             </Button>
                         ))}
