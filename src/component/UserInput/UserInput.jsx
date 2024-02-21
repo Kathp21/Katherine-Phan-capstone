@@ -9,14 +9,18 @@ function UserInput() {
     const { REACT_APP_API_BASE_PATH } = process.env
     const formRef = useRef()
     const [ input, setInput ] = useState([])
-    const [ selectedSeason, setSelectedSeason] = useState()
+    const [ selectedSeason, setSelectedSeason] = useState([])
     const [ selectedInterests, setSelectedInterests ] = useState([])
     const [ sliderValue, setSliderValue ] = useState(0)
 
     const seasons = ['Spring', 'Summer', 'Fall', 'Winter']
 
     const handleSeasonClick = (season) => {
-        setSelectedSeason(season)
+        if (selectedSeason.includes(season)) {
+            setSelectedSeason(selectedSeason.filter(indSeason => indSeason !== season))
+        } else {
+            return setSelectedSeason([...selectedSeason, season])
+        }
     }
 
     const interests = ['Cusine', 'Adventures', 'Nature', 'culture']
@@ -79,9 +83,7 @@ function UserInput() {
                                 key={season}
                                 onClick={() => handleSeasonClick(season)}
                                 label={season}
-                                style={{
-                                    backgroundColor: selectedSeason === season ? 'selected' : 'not-selected',
-                                }}
+                                variant={`${selectedSeason.includes(season) ? 'selected' : 'not-selected'}`}
                             >
                             </Button>
                         ))}
