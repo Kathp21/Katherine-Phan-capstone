@@ -7,8 +7,30 @@ button {
     border-radius: $border-radius;
     border: none;
     color: $white;
+    width: 4rem;
+    font-size: 0.813rem;
+    font-weight: 500;
+
+    @include tablet {
+        width: 6rem;
+        font-size: 0.875rem;
+    }
 
     &:hover {
         background-color: $graphite;
     }
+}
+
+.button__suggestions {
+    width: 9rem;
+    font-size: 0.813rem;
+    font-weight: 600;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+
+    &:hover {
+        background-color: rgb(22, 41, 111);
+        box-shadow: 0px 15px 20px rgba(22, 41, 111, 0.4);
+        color: #fff;
+        transform: translateY(-7px);
+      }
 }

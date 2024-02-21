@@ -1,4 +1,3 @@
-import ReactSlider from "react-slider"
 import './Slider.scss'
 import { useState } from "react";
 
@@ -8,8 +7,6 @@ const Slider = () => {
     const handleInputChange = (event) => {
         const newValue = event.target.value;
         setValue(newValue);
-        // Update the custom property for styling
-        document.documentElement.style.setProperty('--slider__value', newValue);
     };
 
     return (
@@ -22,7 +19,7 @@ const Slider = () => {
                     name="budget"
                     min="0"
                     max="10000"
-                    step="100"
+                    step="10"
                     value={value}
                     list="values"
                     onInput={handleInputChange}
@@ -31,8 +28,7 @@ const Slider = () => {
                 <datalist className="slider__value-range">
                     <option value="0" label="0"></option>
                     <option value="10000" label="10000"></option>
-                </datalist>
-                
+                </datalist>  
             </div>
         </>
       

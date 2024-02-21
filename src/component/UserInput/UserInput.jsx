@@ -6,25 +6,32 @@ function UserInput() {
 
     return(
         <section className='user-input'>
-            <form>
+            <form className='user-input__container'>
                 <div className='user-input__trip-info'>
                     <label htmlFor='tripDestination'/>
                     <input type='text' name='tripDestination' id='tripDestination' placeholder="Destination:" />
                 </div>
-                <div className='user-input__season-btn'>
-                    <Button buttonText="Winter"/>
-                    <Button buttonText="Spring"/>
-                    <Button buttonText="Summer"/>
-                    <Button buttonText="Fall"/>
-                </div>
+                <section className='user-input__season-container'>
+                    <div className='user-input__season-btn'>
+                        <Button buttonText="Winter"/>
+                        <Button buttonText="Spring"/>
+                        <Button buttonText="Summer"/>
+                        <Button buttonText="Fall"/>
+                    </div>
+                </section>
                 <div className='user-input__trip-info'>
                     <label htmlFor='tripDuration'/>
                     <input type='text' name='tripDuration' id='tripDuration' placeholder="Duration:" />
                 </div>
-                <div>
-                    <Slider/>
+                <div className='user-input__budget-container'>
+                    <div className='user-input__budget'>
+                        <Slider/>
+                    </div>
                 </div>
             </form>
+            <div className='user-input__suggestions'>
+                <Button buttonText="Recommendations" variant="button__suggestions"/>
+            </div>
         </section>
     )
 }
