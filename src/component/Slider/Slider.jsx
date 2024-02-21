@@ -1,17 +1,15 @@
 import './Slider.scss'
 import { useState } from "react";
 
-const Slider = () => {
-    const [value, setValue] = useState(0);
+const Slider = ({value, onChange}) => {
 
-    const handleInputChange = (event) => {
-        const newValue = event.target.value;
-        setValue(newValue);
-    };
+    const handleChange = (e) => {
+        onChange(e.target.value)
+    }
 
     return (
         <>
-            <label htmlFor="budget" className="slider">Budget:</label><br />
+            <label htmlFor="budget" className="slider">Budget:</label>
             <div className="slider__container">
                 <input
                     type="range"
@@ -22,7 +20,7 @@ const Slider = () => {
                     step="10"
                     value={value}
                     list="values"
-                    onInput={handleInputChange}
+                    onChange={handleChange}
                 />
                 <output className="slider__value" style={{ left: `${value / 100}%` }}>${value}</output>
                 <datalist className="slider__value-range">

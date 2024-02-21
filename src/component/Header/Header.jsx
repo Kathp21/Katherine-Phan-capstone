@@ -15,7 +15,7 @@ function Header() {
                             <h3 className='header__title'>Home Page</h3>
                         </div>
                         <div className='header__inactive-nav-link'> 
-                            <h3 className='header__title'>Recommendations</h3>
+                            <h3 className='header__title'>Suggestions</h3>
                         </div>
                     </section>
                 </section>
