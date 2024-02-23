@@ -26,10 +26,10 @@
 
     &__options-btn {
         background: rgba(231, 233, 238, 0.887);
-        padding: 1rem;
+        padding: 1rem 0.5rem;
         display: flex;
         justify-content: space-between;
-        gap: 0.5rem;
+        gap: 0.3rem;
         border-radius: 20px;
         
         // display: grid;
@@ -97,7 +97,7 @@
 
 #additionalInfo {
     @include form-style;
-    padding: 1rem 0.75rem 4rem 0.75rem;
+    padding: 1rem 0.75rem 5rem 0.75rem;
     margin: 1rem 0;
     font-size: 0.875rem;
 

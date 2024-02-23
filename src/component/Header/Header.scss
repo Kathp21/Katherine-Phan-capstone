@@ -46,13 +46,22 @@
         }
     }
 
+    &__state {
+        height: 2.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $border-radius;
+        width: 50%;
+        border-radius: 1.25rem;
+    }
+
     &__active-nav-link {
         background: $instock-black;
         height: 2.25rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 1.25rem;
         width: 50%;
     }
 
@@ -61,7 +70,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 1.25rem;
         width: 50%;
     }
 

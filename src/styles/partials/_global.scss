@@ -6,6 +6,11 @@
     box-sizing: border-box;
 }
 
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     font-family: $main-typeface;
     font-weight: 400;
@@ -13,4 +18,11 @@ body {
     color: $instock-black;
     // background-color: $light-grey;
     background-image: url('../../assets/images/background-img.jpg');
+    background-position: center; 
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+a {
+    text-decoration: none;
 }
