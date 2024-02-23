@@ -1,7 +1,7 @@
 import Button from '../Button/Button'
 import './UserInput.scss'
 import Slider from '../Slider/Slider'
-import axios from 'axios'
+// import axios from 'axios'
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +14,6 @@ function UserInput(props) {
     const [ selectedInterests, setSelectedInterests ] = useState([])
     const [ sliderValue, setSliderValue ] = useState(0)
     const navigate = useNavigate();
-    const [isActive, setIsActive] = useState(true)
 
     const seasons = ['Spring', 'Summer', 'Fall', 'Winter']
 
@@ -43,8 +42,6 @@ function UserInput(props) {
     const handleFormSubmit = (e) => {
         e.preventDefault()
         navigate('/recommendations')
-        setIsActive(false)
-
         addUserInput(e)
     }
 
