@@ -16,6 +16,7 @@ function App() {
     console.log("HIE")
       const url = `${REACT_APP_API_BASE_PATH}/api/chat-completion`
       try {
+          setInput(null)
           let newInput = await axios.post(url, userInput)
           setInput(newInput.data);
           console.log(newInput.data)
