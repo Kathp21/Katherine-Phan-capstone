@@ -2,10 +2,10 @@ import './App.scss';
 import Header from './component/Header/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UserInput from './component/UserInput/UserInput.jsx';
-import { useState} from 'react'
+import { useState } from 'react'
 import DisplayData from './component/DisplayData/DisplayData.jsx';
 import axios from 'axios'
-
+import Layout from './component/Layout/Layout.jsx';
 
 function App() {
 
@@ -27,6 +27,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Layout /> 
       <Header/>
       <Routes>
         <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>

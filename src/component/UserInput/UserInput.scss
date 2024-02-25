@@ -3,6 +3,11 @@
 
 .user-input {
 
+    // background-image: url('../../assets/images/background-img.jpg');
+    // background-position: center; 
+    // background-size: cover; 
+    // background-repeat: no-repeat;
+
     &__container {
         padding: 1rem;
     }
@@ -114,3 +119,4 @@
 .not-selected {
     background: $instock-indigo;
 }
+

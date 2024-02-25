@@ -1,0 +1,34 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.itinerary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    justify-content: center; 
+    padding: 20px;
+
+    @include tablet {
+        flex-wrap: nowrap;
+    }
+    
+    &__cost-container {
+        display: flex;
+
+    }
+
+    &__cost {
+        display: flex;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px auto;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+}
+
+.specific-page-background {
+    background-color: $light-grey;
+}

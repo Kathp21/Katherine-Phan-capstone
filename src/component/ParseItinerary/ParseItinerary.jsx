@@ -1,27 +1,31 @@
+
 function parseItinerary(inputString) {
-    // Split the string into sections based on "Day X:" pattern
-    const daySections = inputString.split(/(Day \d+:)/).filter(Boolean);
-  
-    const itineraryData = [];
-  
-    for (let i = 0; i < daySections.length; i += 2) {
-      const day = daySections[i].trim();
-      const activitiesString = daySections[i + 1];
-  
-      // Split activities based on newlines, filter out empty strings
-      const activities = activitiesString.split('\n').filter(Boolean);
-  
-      itineraryData.push({ day, activities });
+  // Split the inputString into itinerary part and cost part
+  const [itineraryPart, costPart] = inputString.split(/Total estimated cost:|Total cost breakdown:|Total cost estimate|Total cost:/);
+
+  // Parse the itinerary part
+  const itineraryData = itineraryPart.trim().split(/(Day \d+:)/).filter(Boolean).map((item, index, array) => {
+    if (index % 2 === 0) { 
+      return {
+        day: item.trim(),
+        activities: array[index + 1].trim().split('\n').filter(Boolean) 
+      };
     }
-  
-    // Handle the total estimated cost, which doesn't follow the "Day X:" pattern
-    const costSection = inputString.split("Total estimated cost:")[1];
-    if (costSection) {
-      const activities = costSection.split('\n').filter(Boolean);
-      itineraryData.push({ day: "Total estimated cost", activities });
-    }
-  
-    return itineraryData;
-  }
-  
-  export default parseItinerary
+    return null;
+  }).filter(item => item);
+
+  // Parse the cost part
+  const costData = costPart && costPart.trim() ? {
+    title: "Total estimated cost",
+    details: costPart.trim().split('\n').filter(Boolean)
+  } : {
+    details: []
+  };
+  // Return both parts
+  return {
+    itineraryData,
+    costData
+  };
+}
+
+export default parseItinerary
