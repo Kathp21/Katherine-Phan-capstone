@@ -3,11 +3,6 @@
 
 .user-input {
 
-    // background-image: url('../../assets/images/background-img.jpg');
-    // background-position: center; 
-    // background-size: cover; 
-    // background-repeat: no-repeat;
-
     &__container {
         padding: 1rem;
     }
@@ -36,11 +31,7 @@
         justify-content: space-between;
         gap: 0.3rem;
         border-radius: 20px;
-        
-        // display: grid;
-        // grid-template-columns: repeat(2, 1fr);
-        // grid-gap: 10px; 
-
+    
         @include tablet {
             width: 50%;
             display: flex;

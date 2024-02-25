@@ -89,9 +89,11 @@ function UserInput(props) {
                         ))}
                     </div>
                 </section>
-                <div className='user-input__trip-info'>
-                    <label htmlFor='tripDuration'/>
-                    <input type='text' name='tripDuration' id='tripDuration' placeholder="Duration:" />
+                <div>
+                    <div className='user-input__trip-info'>
+                        <label htmlFor='tripDuration'/>
+                        <input type='text' name='tripDuration' id='tripDuration' placeholder="Duration:" />
+                    </div>
                 </div>
                 <div className='user-input__budget-container'>
                     <div className='user-input__budget'>

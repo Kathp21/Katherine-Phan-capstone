@@ -13,7 +13,6 @@ function Header() {
 
     useEffect(() => {
         setActiveLink(location.pathname);
-        console.log(location.pathname)
     }, [location.pathname]);
 
 

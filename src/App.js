@@ -5,7 +5,7 @@ import UserInput from './component/UserInput/UserInput.jsx';
 import { useState } from 'react'
 import DisplayData from './component/DisplayData/DisplayData.jsx';
 import axios from 'axios'
-import Layout from './component/Layout/Layout.jsx';
+// import Layout from './component/Layout/Layout.jsx';
 
 function App() {
 
@@ -13,13 +13,11 @@ function App() {
   const [ input, setInput ] = useState()
   
   const addUserInput = async (userInput) => {
-    console.log("HIE")
       const url = `${REACT_APP_API_BASE_PATH}/api/chat-completion`
       try {
           setInput(null)
           let newInput = await axios.post(url, userInput)
-          setInput(newInput.data);
-          console.log(newInput.data)
+          setInput(JSON.parse(newInput.data));
       } catch(error) {
           console.error(error)
       }
@@ -27,7 +25,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Layout /> 
       <Header/>
       <Routes>
         <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>

@@ -2,18 +2,42 @@
 @use '../../styles/partials/variables' as *;
 
 .card {
-    margin: 20px auto;
-    // box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    // transition: box-shadow 0.3s ease;
+    // margin: 20px auto;
+    // // box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    // overflow: hidden;
+    // // transition: box-shadow 0.3s ease;
+    // max-width: 350px; // Or any max-width that suits your design
+    // margin: auto;
+    // width: 200px;
+    // height: 35vh;
+    // border-radius: 20px;
+    background-color: #e4f0fc;
+    // overflow: hidden;
+    // margin-right: 10px;
+    // margin-top: 2rem;
+    // display: inline-block;
+    cursor: pointer;
+    // -webkit-transition: 1000ms all;
+    transition: 1000ms all;
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
+    border-radius: 20px;
+    padding: 1rem;
+    flex: 0 0 auto; 
+    width: 300px; 
+    margin: 10px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease;
+    position: relative;
 
     @include tablet {
-        flex: 0.5;
+        // flex: 0.5;
+        width: 20vw;
     }
   
     &:hover {
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transform: scale(1.05);
     }
   }
   
@@ -21,23 +45,5 @@
     padding: 20px;
     background-color: #fff;
   }
-  
-  h2 {
-    margin-top: 0;
-    color: #333;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  
-    li {
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
-  
-      &:last-child {
-        border-bottom: none;
-      }
-    }
-  }
+
   

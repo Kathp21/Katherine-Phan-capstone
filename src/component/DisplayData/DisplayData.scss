@@ -2,18 +2,61 @@
 @use '../../styles/partials/variables' as *;
 
 .itinerary {
+    // display: flex;
+    // flex-wrap: wrap;
+    // gap: 20px; 
+    // justify-content: center; 
+    // padding: 20px;
+    // max-height: 75vh; // Adjust the height as needed
+    // // overflow-x: scroll;
+    // width: 100%;
+    // overflow-y: scroll;
+    // // overflow: auto;
+    // padding: 30px;
+    // // padding-top: 80px;
+    // position: relative;
+    // -webkit-box-sizing: border-box;
+    // box-sizing: border-box;
+
+
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px; 
-    justify-content: center; 
-    padding: 20px;
+    // place-items: center; /* Shortcut for both horizontal and vertical centering */
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+
+    &__info {
+    display: flex; 
+    overflow-x: auto; 
+    scrollbar-width: thin; 
+    // scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+    appearance: none; 
+    --webkit-appearance: none;
 
     @include tablet {
         flex-wrap: nowrap;
     }
+
+    &::-webkit-scrollbar {
+        height: 8px; 
+    }
+
+      &::-webkit-scrollbar-thumb {
+        appearance: none; 
+        --webkit-appearance: none;
+        background-color: $instock-indigo; 
+        border-radius: 4px;
+      }
+      
+     &::-webkit-scrollbar-track {
+        background-color: $white; 
+      }
+
+    }
     
     &__cost-container {
         display: flex;
+        margin-top: 20px;
 
     }
 
