@@ -1,25 +1,29 @@
 import './Card.scss'
 
 function Card({ day }) {
+
+  console.log(day)
     return (
-      // <div className="card">
-      //   <div className='card__container'>
-      //     <h2>{day}</h2>
-      //     <ul>
-      //       {activities.map((activity, index) => (
-      //         <li key={index}>{activity}</li>
-      //       ))}
-      //     </ul>
-      //   </div>
-      // </div>
-    <div className="card">
-      <h3>{day.day_string}</h3>
-      <p>Destination: {day.destination}</p>
-      <p>Duration: {day.duration} days</p>
-      {day.budget && <p>Budget: ${day.budget}</p>}
-      <p>Description: {day.description}</p>
-    </div>
-    );
+      <section className='card'>
+        <div className='card__container'>
+          <p className="card__day">{day.day_string}</p> 
+          <section className='card__items-container'>
+            <div className='card__space'>
+              <h4 className='card__title'>Destination</h4>
+              <p className="card__item">{day.location}</p> 
+            </div>
+            <div className='card__space'>
+              <h4 className='card__title'>Budget</h4>
+              <p className="card__item">{day.budget}</p> 
+            </div>
+          </section>
+          <div>
+            <h4 className='card__title'>Description</h4>
+            <p className="card__item">{day.description}</p> 
+          </div>
+        </div>
+      </section>
+    )
   }
 
   export default Card

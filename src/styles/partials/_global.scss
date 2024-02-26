@@ -16,7 +16,6 @@ body {
     font-weight: 400;
     margin: 0;
     color: $instock-black;
-    // background-color: $light-grey;
     background-image: url('../../assets/images/background-img.jpg');
     background-position: center; 
     background-size: cover; 
@@ -29,4 +28,12 @@ a {
 
 ul {
     list-style-type: none;
+}
+
+p {
+    margin: 1rem 0;
+}
+
+h4 {
+    margin: 1rem 0;
 }

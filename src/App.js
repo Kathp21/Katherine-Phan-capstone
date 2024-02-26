@@ -1,11 +1,11 @@
-import './App.scss';
-import Header from './component/Header/Header';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import UserInput from './component/UserInput/UserInput.jsx';
+import './App.scss'
+import Header from './component/Header/Header'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import UserInput from './component/UserInput/UserInput.jsx'
 import { useState } from 'react'
-import DisplayData from './component/DisplayData/DisplayData.jsx';
+import DisplayData from './component/DisplayData/DisplayData.jsx'
 import axios from 'axios'
-// import Layout from './component/Layout/Layout.jsx';
+import Layout from './component/Layout/Layout.jsx'
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
       try {
           setInput(null)
           let newInput = await axios.post(url, userInput)
-          setInput(JSON.parse(newInput.data));
+          setInput(JSON.parse(newInput.data))
       } catch(error) {
           console.error(error)
       }
@@ -25,13 +25,14 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Layout/>
       <Header/>
       <Routes>
         <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>
         <Route path='/recommendations' element={<DisplayData inputData={input}/>}/>
       </Routes>
     </BrowserRouter>
-  );
+  )
 }
 
 export default App;

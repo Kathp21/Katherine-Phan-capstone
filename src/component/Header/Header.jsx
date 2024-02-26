@@ -22,19 +22,18 @@ function Header() {
                 <nav className='header__logo-container'>
                     <Link to={`/`} onClick={() => updateActiveLink('/')}>
                         <img src={logo} alt='travel logo' className='header__logo'/>
-                        <span className='header__web-title'>Trip Planner</span>
+                        <span className='header__web-title'>Trip Crafters</span>
                     </Link>
                 </nav>
                 <section className='header__nav-link'>
-                    {/* <div className='header__active-nav-link'>  */}
                     <div className={`header__state ${activeLink === '/' ? 'header__active-nav-link' : 'header__inactive-nav-link'}`}>
                         <Link to={`/`} onClick={() => updateActiveLink('/')}>
-                            <h3 className='header__title'>Home Page</h3>
+                            <h3 className='header__title'>User Input</h3>
                         </Link>
                     </div>
                     <div className={`header__state ${activeLink === '/recommendations' ? 'header__active-nav-link' : 'header__inactive-nav-link'}`}>
                         <Link to={`/recommendations`} onClick={() => updateActiveLink('recommendations')}>
-                            <h3 className='header__title'>Suggestions</h3>
+                            <h3 className='header__title'>Travel Plan</h3>
                         </Link> 
                     </div>
                 </section>
