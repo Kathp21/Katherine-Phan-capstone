@@ -2,7 +2,9 @@ import Card from "../Card/Card"
 import './DisplayData.scss'
 import Loading from "../Loading/Loading"
 
-function DisplayData({ inputData }) {
+function DisplayData({ inputData, isFirstLoad }) {
+  if (!inputData && isFirstLoad) return <Loading text="PLEASE SUBMIT INFO"/>
+
   if (!inputData) return <Loading/>
 
   return (

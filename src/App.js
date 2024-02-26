@@ -11,16 +11,18 @@ function App() {
 
   const { REACT_APP_API_BASE_PATH } = process.env
   const [ input, setInput ] = useState()
+  const [ isFirstLoad, setIsFirstLoad ] = useState(true)
   
   const addUserInput = async (userInput) => {
-      const url = `${REACT_APP_API_BASE_PATH}/api/chat-completion`
-      try {
-          setInput(null)
-          let newInput = await axios.post(url, userInput)
-          setInput(JSON.parse(newInput.data))
-      } catch(error) {
-          console.error(error)
-      }
+    setIsFirstLoad(false)
+    const url = `${REACT_APP_API_BASE_PATH}/api/chat-completion`
+    try {
+        setInput(null)
+        let newInput = await axios.post(url, userInput)
+      setInput(JSON.parse(newInput.data))
+    } catch(error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -29,7 +31,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>
-        <Route path='/recommendations' element={<DisplayData inputData={input}/>}/>
+        <Route path='/recommendations' element={<DisplayData inputData={input} isFirstLoad={isFirstLoad}/>}/>
       </Routes>
     </BrowserRouter>
   )

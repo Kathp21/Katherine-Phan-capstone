@@ -34,15 +34,16 @@
    
     &__text{
         font-weight: 500;
-        font-size: 5vw;
+        font-size: 3vw;
         line-height: 64px;
         letter-spacing: 10px;
         display: flex;
         justify-content: space-evenly;
+        margin-bottom: 1rem;
 
         @include tablet {
-            margin-bottom: 1.5rem;
-            font-size: 7vw;
+            margin-bottom: 2rem;
+            font-size: 5vw;
         }
     }
 }
