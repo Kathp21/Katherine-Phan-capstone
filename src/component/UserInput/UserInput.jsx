@@ -1,15 +1,12 @@
 import Button from '../Button/Button'
 import './UserInput.scss'
 import Slider from '../Slider/Slider'
-// import axios from 'axios'
-import { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function UserInput(props) {
 
-    // const { REACT_APP_API_BASE_PATH } = process.env
     const formRef = useRef()
-    // const [ input, setInput ] = useState([])
     const [ selectedSeason, setSelectedSeason] = useState([])
     const [ selectedInterests, setSelectedInterests ] = useState([])
     const [ sliderValue, setSliderValue ] = useState(0)
@@ -56,15 +53,6 @@ function UserInput(props) {
             interests: selectedInterests,
             additionalInfo: formRef.current.additionalInfo.value
         }
-
-        // try {
-        //     const url = `${REACT_APP_API_BASE_PATH}/api/chat-completion`
-        //     let newInput = await axios.post(url, userInput)
-        //     setInput([...input, newInput.data])
-        //     console.log(newInput.data)
-        // } catch(error) {
-        //     console.error(error)
-        // }
 
         props.onAddUserInput(userInput)
     }

@@ -1,8 +1,6 @@
 import './Card.scss'
 
 function Card({ day }) {
-
-  console.log(day)
     return (
       <section className='card'>
         <div className='card__container'>
@@ -17,10 +15,8 @@ function Card({ day }) {
               <p className="card__item">{day.budget}</p> 
             </div>
           </section>
-          <div>
-            <h4 className='card__title'>Description</h4>
-            <p className="card__item">{day.description}</p> 
-          </div>
+          <h4 className='card__title'>Description</h4>
+          <p className="card__item">{day.description}</p> 
         </div>
       </section>
     )

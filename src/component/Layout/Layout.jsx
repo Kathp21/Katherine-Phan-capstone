@@ -1,4 +1,3 @@
-
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import backgroundImage from '../../assets/images/background-img.jpg'
@@ -17,6 +16,6 @@ const Layout = () => {
   }, [location])
 
   return null
-};
+}
 
-export default Layout;
+export default Layout

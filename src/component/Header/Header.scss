@@ -3,7 +3,6 @@
 
 .header {
     background-color: $graphite;
-    // background-color: rgba(35, 41, 64, 0.5);
     
     &__container {
         padding: 0 1rem;
@@ -47,7 +46,7 @@
     }
 
     &__state {
-        height: 2.25rem;
+        height: $btn-height;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -58,7 +57,7 @@
 
     &__active-nav-link {
         background: $instock-black;
-        height: 2.25rem;
+        height: $btn-height;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -66,7 +65,7 @@
     }
 
     &__inactive-nav-link {
-        height: 2.25rem;
+        height: $btn-height;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -76,5 +75,4 @@
     &__title {
         color: $white;
     }
-
 }

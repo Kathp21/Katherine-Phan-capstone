@@ -13,13 +13,6 @@ export default function Loading() {
                     <span>N</span>
                     <span>G</span>
                     <span>😀</span>
-                    {/* <span>.</span>
-                    <span>.</span> */}
-                    {/* <span>Loading</span>
-                    <span>Your</span>
-                    <span>Travel</span>
-                    <span>Itinerary</span> */}
-
                 </div>
                 
             </div>

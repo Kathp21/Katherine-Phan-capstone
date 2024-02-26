@@ -7,8 +7,8 @@
 
   &__container {
     padding: 1.5rem;
-    background-color: #e4f0fc;
-    border-radius: 20px;
+    background-color: $itinerary-card;
+    border-radius: $card-corner;
     margin: 1rem 1.5rem; 
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     transition: box-shadow 0.3s ease;
@@ -38,6 +38,7 @@
     }
 
     &__title {
+      font-size: $mob-header;
 
       @include tablet { 
         display: none;
@@ -46,6 +47,19 @@
 
     &__day {
       font-weight: bold;
+      font-size: $mob-header;
+
+      @include tablet { 
+        font-size: $tab-header;
+      }
+    }
+
+    &__item {
+      font-size: $mob-body;
+
+      @include tablet {
+        font-size: $tab-body;
+      }
     }
 }
   

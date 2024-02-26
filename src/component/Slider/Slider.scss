@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     font-weight: 500;
-    font-size: 0.875rem;
+    font-size: $mob-header;
     margin-bottom: 0.5rem;
 
     @include tablet {
@@ -21,13 +21,13 @@
         color: $white;
         background: $instock-indigo;
         font-weight: 600;
-        font-size: 0.813rem;
+        font-size: $mob-body;
         padding: 0.3rem;
-        border-radius: 20px;
+        border-radius: $card-corner;
         transform: translateX(-50%);
 
         @include tablet {
-            font-size: 0.875rem;
+            font-size: $tab-body;
         }
     }
 
@@ -38,11 +38,11 @@
 }
 
 option {
-    font-size: 0.813rem;
+    font-size: $mob-body;
     font-weight: 600;
 
     @include tablet {
-        font-size: 0.875rem;
+        font-size: $tab-body;
     }
 }
 
@@ -56,30 +56,30 @@ option {
     &::-webkit-slider-thumb {
         appearance: none; 
         --webkit-appearance: none;
-        width: 20px;
-        height: 20px;
+        width: $slider-width;
+        height: $slider-height;
         background: $instock-indigo;
         cursor: pointer;
-        border-radius: 50%;
-        margin-top: -5px;
+        border-radius: $slider-corner;
+        margin-top: $slider-margin;
       }
     
       &::-moz-range-thumb {
-        width: 20px;
-        height: 20px;
+        width: $slider-width;
+        height: $slider-height;
         background: $instock-indigo;
         cursor: pointer;
-        border-radius: 50%;
-        margin-top: -5px;
+        border-radius: $slider-corner;
+        margin-top: $slider-margin;
       }
     
       &::-ms-thumb {
-        width: 20px;
-        height: 20px;
+        width: $slider-width;
+        height: $slider-height;
         background: $instock-indigo;
         cursor: pointer;
-        border-radius: 50%;
-        margin-top: -5px;
+        border-radius: $slider-corner;
+        margin-top: $slider-margin;
       }
 
     &:focus {

@@ -13,13 +13,29 @@ $slate: #5C667E;
 // BACKGROUND
 $graphite: #232940;
 $light-grey: #F7F8F9;
+$itinerary-background: #b6d7f7;
+$itinerary-card: #e4f0fc;
+$options-background: rgba(231, 233, 238, 0.887);
 
 // MEDIA QUERIES
-
 $tablet-breakpoint: 47.938rem; /* 767px */
 $desktop-breakpoint: 80rem; /* 1280px */
 
 //BUTTON
-
 $btn-height: 2.25rem;
 $border-radius: 4px;
+
+//TEXT
+$mob-body: 0.813rem;
+$tab-body: 0.875rem;
+$mob-header: 0.875rem;
+$tab-header: 1rem;
+
+//SLIDER
+$slider-height: 1.25rem;
+$slider-width: 1.25rem;
+$slider-corner: 50%;
+$slider-margin: -5px;
+
+//OTHER
+$card-corner: 1.25rem;
