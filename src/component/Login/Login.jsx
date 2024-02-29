@@ -6,12 +6,13 @@ export default function Login() {
 
     const { REACT_APP_API_BASE_PATH } = process.env
     const [ signUpData, setSignUpData ] = useState({
-        username: '',
-        name: '',
+        first_name: '',
+        last_name: '',
+        email: '',
         password: ''
     })
 
-    const [ loginData, setLoginData ] = useState({ username: '', password: ''})
+    const [ loginData, setLoginData ] = useState({ email: '', password: ''})
 
     const handleSignUpFormChange = (e, property) => {
         setSignUpData(state => ({...state, [property]: e.target.value}))
@@ -46,20 +47,28 @@ export default function Login() {
                 <h2>Sign Up</h2>
                 <form onSubmit={handleSignUpSubmit}>
                     <div>
-                        <label htmlFor='username'>Username</label>
+                        <label htmlFor='name'>First Name</label>
                         <input
                             type='text'
-                            value={signUpData.username}
-                            onChange={e => handleSignUpFormChange(e, 'username')}
-                            id='username' />
+                            value={signUpData.first_name}
+                            onChange={e => handleSignUpFormChange(e, 'first_name')}
+                            id='firstName' />
                     </div>
                     <div>
-                        <label htmlFor='name'>Name</label>
+                        <label htmlFor='name'>Last Name</label>
                         <input
                             type='text'
-                            value={signUpData.name}
-                            onChange={e => handleSignUpFormChange(e, 'name')}
-                            id='name' />
+                            value={signUpData.last_name}
+                            onChange={e => handleSignUpFormChange(e, 'last_name')}
+                            id='lastName' />
+                    </div>
+                    <div>
+                        <label htmlFor='username'>email</label>
+                        <input
+                            type='text'
+                            value={signUpData.email}
+                            onChange={e => handleSignUpFormChange(e, 'email')}
+                            id='email' />
                     </div>
                     <div>
                         <label htmlFor='password'>Password</label>

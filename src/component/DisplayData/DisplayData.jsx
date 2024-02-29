@@ -20,7 +20,7 @@ function DisplayData({ inputData, isFirstLoad }) {
         {inputData.itinerary.map((item) => {
           return (
             <Card
-              key={item.id}
+              key={item.day_string}
               day={item}
             /> 
           )
