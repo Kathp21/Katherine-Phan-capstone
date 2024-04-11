@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export default function Login() {
 
-    const { REACT_APP_API_BASE_PATH } = process.env
+    const { REACT_APP_API_BASE_PATH_USER } = process.env
     const [ signUpData, setSignUpData ] = useState({
         first_name: '',
         last_name: '',
@@ -25,16 +25,20 @@ export default function Login() {
     const handleSignUpSubmit = async e => {
         e.preventDefault()
 
-        // ADD USER TO DATABASE
-        const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH}/register`, signUpData)
-        console.log(signUpRes)
+    // ADD USER TO DATABASE
+        try{ const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/register`, signUpData)
+            console.log(signUpData)
+            console.log(signUpRes)
+        } catch(error) {
+            console.error('Sign up failed.')
+        }
     }
 
     const handleLoginSubmit = async e => {
         e.preventDefault()
     
         // STEP 1: GET JWT FROM SERVER
-        const loginRes = await axios.post(`${REACT_APP_API_BASE_PATH}/login`, loginData)
+        const loginRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/login`, loginData)
         console.log(loginRes)
     
         // STEP 2: STORING JWT IN BROWSER STORAGE - localStorage, sessionStorage, cookies
@@ -47,7 +51,7 @@ export default function Login() {
                 <h2>Sign Up</h2>
                 <form onSubmit={handleSignUpSubmit}>
                     <div>
-                        <label htmlFor='name'>First Name</label>
+                        <label htmlFor='firtName'>First Name</label>
                         <input
                             type='text'
                             value={signUpData.first_name}
@@ -55,7 +59,7 @@ export default function Login() {
                             id='firstName' />
                     </div>
                     <div>
-                        <label htmlFor='name'>Last Name</label>
+                        <label htmlFor='lastName'>Last Name</label>
                         <input
                             type='text'
                             value={signUpData.last_name}
@@ -85,11 +89,11 @@ export default function Login() {
                 <h2>Log In</h2>
                 <form onSubmit={handleLoginSubmit}>
                     <div>
-                        <label htmlFor='loginUsername'>Username</label>
+                        <label htmlFor='loginUsername'>Email</label>
                         <input
                         type='text'
                         value={loginData.username}
-                        onChange={e => handleLoginFormChange(e, 'username')}
+                        onChange={e => handleLoginFormChange(e, 'email')}
                         id='loginUsername' />
                     </div>
                     <div>
