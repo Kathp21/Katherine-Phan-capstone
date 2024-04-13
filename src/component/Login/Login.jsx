@@ -29,6 +29,12 @@ export default function Login() {
         try{ const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/register`, signUpData)
             console.log(signUpData)
             console.log(signUpRes)
+
+            // const token = signUpRes.data.token
+            // console.log('Token:', token);
+            // localStorage.setItem('authToken', token)
+
+
         } catch(error) {
             console.error('Sign up failed.')
         }
