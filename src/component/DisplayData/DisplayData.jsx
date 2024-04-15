@@ -2,6 +2,7 @@ import Card from "../Card/Card"
 import './DisplayData.scss'
 import Loading from "../Loading/Loading"
 import Login from '../Login/Login'
+import Register from "../Register /Register"
 
 function DisplayData({ inputData, isFirstLoad }) {
   if (!inputData && isFirstLoad) return <Loading text="PLEASE SUBMIT INFO"/>
@@ -27,6 +28,7 @@ function DisplayData({ inputData, isFirstLoad }) {
         })}
       </ul>
       <p>Want to save your travel itinerary?</p>
+      <Register/>
       <Login/>
     </section>
   )

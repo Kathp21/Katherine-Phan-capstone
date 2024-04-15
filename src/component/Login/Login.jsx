@@ -5,40 +5,40 @@ import axios from 'axios'
 export default function Login() {
 
     const { REACT_APP_API_BASE_PATH_USER } = process.env
-    const [ signUpData, setSignUpData ] = useState({
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: ''
-    })
+    // const [ signUpData, setSignUpData ] = useState({
+    //     first_name: '',
+    //     last_name: '',
+    //     email: '',
+    //     password: ''
+    // })
 
     const [ loginData, setLoginData ] = useState({ email: '', password: ''})
 
-    const handleSignUpFormChange = (e, property) => {
-        setSignUpData(state => ({...state, [property]: e.target.value}))
-    }
+    // const handleSignUpFormChange = (e, property) => {
+    //     setSignUpData(state => ({...state, [property]: e.target.value}))
+    // }
 
     const handleLoginFormChange = (e, property) => {
         setLoginData(state => ({ ...state, [property]: e.target.value }))
     }
 
-    const handleSignUpSubmit = async e => {
-        e.preventDefault()
+    // const handleSignUpSubmit = async e => {
+    //     e.preventDefault()
 
-    // ADD USER TO DATABASE
-        try{ const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/register`, signUpData)
-            console.log(signUpData)
-            console.log(signUpRes)
+    // // ADD USER TO DATABASE
+    //     try{ const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/register`, signUpData)
+    //         console.log(signUpData)
+    //         console.log(signUpRes)
 
-            // const token = signUpRes.data.token
-            // console.log('Token:', token);
-            // localStorage.setItem('authToken', token)
+    //         // const token = signUpRes.data.token
+    //         // console.log('Token:', token);
+    //         // localStorage.setItem('authToken', token)
 
 
-        } catch(error) {
-            console.error('Sign up failed.')
-        }
-    }
+    //     } catch(error) {
+    //         console.error('Sign up failed.')
+    //     }
+    // }
 
     const handleLoginSubmit = async e => {
         e.preventDefault()
@@ -53,7 +53,7 @@ export default function Login() {
 
     return (
         <div>
-            <section>
+            {/* <section>
                 <h2>Sign Up</h2>
                 <form onSubmit={handleSignUpSubmit}>
                     <div>
@@ -90,7 +90,7 @@ export default function Login() {
                     </div>
                     <button>Sign Up</button>
                 </form>
-            </section>
+            </section> */}
             <section>
                 <h2>Log In</h2>
                 <form onSubmit={handleLoginSubmit}>
