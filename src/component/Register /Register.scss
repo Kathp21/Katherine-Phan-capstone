@@ -1,24 +1,32 @@
 a, a:visited {
-    color: #fff;
+    color: #0b0a0a;
 }
 
 input[type="text"],
 input[type="password"],
-button,
 textarea {
-  font-family: 'Nunito', sans-serif;
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 0.5rem;
 }
 
-label,
-button {
+label {
   margin-top: 1rem;
 }
 
-button {
+.register__button {
   padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+.register__form-box {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+}
+
+.register__email {
+    padding-right: 1.7rem;
 }
 
 .instructions {
@@ -64,4 +72,6 @@ button {
 
 .line {
     display: inline-block;
+    margin-left: 0.5rem;
+    // text-decoration: underline;
 }

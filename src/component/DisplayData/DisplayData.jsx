@@ -29,7 +29,6 @@ function DisplayData({ inputData, isFirstLoad }) {
       </ul>
       <p>Want to save your travel itinerary?</p>
       <Register/>
-      <Login/>
     </section>
   )
 }

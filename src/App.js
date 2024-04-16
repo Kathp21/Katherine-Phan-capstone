@@ -6,6 +6,7 @@ import { useState } from 'react'
 import DisplayData from './component/DisplayData/DisplayData.jsx'
 import axios from 'axios'
 import Layout from './component/Layout/Layout.jsx'
+import Login from './component/Login/Login.jsx'
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>
         <Route path='/recommendations' element={<DisplayData inputData={input} isFirstLoad={isFirstLoad}/>}/>
+        <Route path='/login' element={<Login/>} />
       </Routes>
     </BrowserRouter>
   )
