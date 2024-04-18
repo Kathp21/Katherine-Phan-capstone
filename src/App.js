@@ -33,7 +33,7 @@ function App() {
       <Routes>
         <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>
         <Route path='/recommendations' element={<DisplayData inputData={input} isFirstLoad={isFirstLoad}/>}/>
-        <Route path='/login' element={<Login/>} />
+        <Route path='/login' element={<Login/>}/>
       </Routes>
     </BrowserRouter>
   )

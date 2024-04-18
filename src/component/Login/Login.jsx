@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './Login.scss'
 import axios from 'axios'
+import Register from '../Register /Register'
 
 export default function Login() {
 
@@ -53,6 +54,7 @@ export default function Login() {
 
     return (
         <div>
+            <Register />
             {/* <section>
                 <h2>Sign Up</h2>
                 <form onSubmit={handleSignUpSubmit}>

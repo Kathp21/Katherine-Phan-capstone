@@ -8,7 +8,7 @@ import './Register.scss';
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-export default function Register() {
+export default function Register({ itineraryData }) {
     const userRef = useRef()
     const errRef = useRef()
 
@@ -62,6 +62,34 @@ export default function Register() {
         try { const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/register`, signUpData)
             console.log(signUpData)
             console.log(signUpRes)
+
+              // Assuming the server responds with a JWT token on successful registration
+            const { token } = signUpRes.data;
+
+            console.log("Itinerary Data to Save:", itineraryData);
+
+            localStorage.setItem('authToken', signUpRes.data.token)
+              // Save the itinerary after successful registration
+            // if (itineraryData) {
+            //     await axios.post(`${REACT_APP_API_BASE_PATH_USER}/save-itinerary`, itineraryData, {
+            //         headers: {
+            //             Authorization: `Bearer ${token}`
+            //         }
+            //     });
+            // }
+
+            if (itineraryData) {
+                try {
+                    const saveItineraryResponse = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/save-itinerary`, itineraryData, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
+                    console.log('Itinerary saved successfully:', saveItineraryResponse.data);
+                } catch (error) {
+                    console.error('Error saving itinerary:', error.response ? error.response.data : error.message);
+                }
+}
 
             setSuccess(true)
 
