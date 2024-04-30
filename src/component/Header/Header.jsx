@@ -41,6 +41,11 @@ function Header() {
                             <h3 className='header__title'>Login</h3>
                         </Link> 
                     </div>
+                    <div className={`header__state ${activeLink === '/login' ? 'header__active-nav-link' : 'header__inactive-nav-link'}`}>
+                        <Link to={`/login`} onClick={() => updateActiveLink('recommendations')}>
+                            <h3 className='header__title'>User Account</h3>
+                        </Link> 
+                    </div>
                 </section>
             </section>
         </header>

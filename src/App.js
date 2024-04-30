@@ -7,6 +7,7 @@ import DisplayData from './component/DisplayData/DisplayData.jsx'
 import axios from 'axios'
 import Layout from './component/Layout/Layout.jsx'
 import Login from './component/Login/Login.jsx'
+import { AuthProvider } from './component/Utilities/AuthContext.js'
 
 function App() {
 
@@ -27,15 +28,17 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Layout/>
-      <Header/>
-      <Routes>
-        <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>
-        <Route path='/recommendations' element={<DisplayData inputData={input} isFirstLoad={isFirstLoad}/>}/>
-        <Route path='/login' element={<Login/>}/>
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Layout/>
+        <Header/>
+        <Routes>
+          <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>
+          <Route path='/recommendations' element={<DisplayData inputData={input} isFirstLoad={isFirstLoad}/>}/>
+          <Route path='/login' element={<Login/>}/>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 

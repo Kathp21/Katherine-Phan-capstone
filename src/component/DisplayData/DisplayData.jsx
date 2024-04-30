@@ -1,7 +1,7 @@
 import Card from "../Card/Card"
 import './DisplayData.scss'
 import Loading from "../Loading/Loading"
-import Login from '../Login/Login'
+// import Login from '../Login/Login'
 import Register from "../Register /Register"
 
 function DisplayData({ inputData, isFirstLoad }) {
@@ -28,7 +28,7 @@ function DisplayData({ inputData, isFirstLoad }) {
         })}
       </ul>
       <p>Want to save your travel itinerary?</p>
-      <Register itineraryData={inputData} />
+      <Register itineraryData={inputData}/>
     </section>
   )
 }

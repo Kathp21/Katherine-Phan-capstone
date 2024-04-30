@@ -4,6 +4,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
 import './Register.scss';
+// import apiClient from '../Utilities/ApiClient';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -58,40 +59,62 @@ export default function Register({ itineraryData }) {
             setErrMsg("Invalid Entry")
             return
         }
-    // ADD USER TO DATABASE
+        // ADD USER TO DATABASE
         try { const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/register`, signUpData)
             console.log(signUpData)
             console.log(signUpRes)
 
-              // Assuming the server responds with a JWT token on successful registration
-            const { token } = signUpRes.data;
+        // Assuming the server responds with a JWT token on successful registration
+        const { token } = signUpRes.data;
 
-            console.log("Itinerary Data to Save:", itineraryData);
+        console.log("Itinerary Data to Save:", itineraryData);
 
-            localStorage.setItem('authToken', signUpRes.data.token)
-              // Save the itinerary after successful registration
-            // if (itineraryData) {
-            //     await axios.post(`${REACT_APP_API_BASE_PATH_USER}/save-itinerary`, itineraryData, {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`
-            //         }
-            //     });
-            // }
+        localStorage.setItem('authToken', signUpRes.data.token)
+        // Save the itinerary after successful registration
 
-            if (itineraryData) {
-                try {
-                    const saveItineraryResponse = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/save-itinerary`, itineraryData, {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    });
-                    console.log('Itinerary saved successfully:', saveItineraryResponse.data);
-                } catch (error) {
-                    console.error('Error saving itinerary:', error.response ? error.response.data : error.message);
-                }
-}
+        if (itineraryData) {
+            try {
+                const saveItineraryResponse = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/save-itinerary`, itineraryData, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log('Itinerary saved successfully:', saveItineraryResponse.data);
+            } catch (error) {
+                console.error('Error saving itinerary:', error.response ? error.response.data : error.message);
+            }
+        }
 
-            setSuccess(true)
+        //Sign in the user after successful registration
+        const signInResponse = await axios.post ( `${REACT_APP_API_BASE_PATH_USER}/login`, {
+            email: signUpData.email,
+            password: signUpData.password
+        })
+
+        if (signInResponse.status === 200) {
+            const userData = signInResponse.data.user
+            localStorage.setItem('userData', JSON.stringify(userData))
+        } else {
+            setErrMsg('Sign-in failed. Please check your credentials.');
+            // Optionally, you can clear the form fields to allow the user to try again
+            setSignUpData({
+                first_name: '',
+                last_name: '',
+                email: '',
+                password: ''
+            })
+        }
+
+        // try {
+        //     const signUpRes = await apiClient.post('/register', signUpData);
+        //     localStorage.setItem('authToken', signUpRes.data.token);
+    
+        //     if (itineraryData) {
+        //         const saveItineraryResponse = await apiClient.post('/save-itinerary', itineraryData);
+        //         console.log('Itinerary saved successfully:', saveItineraryResponse.data);
+        //     }
+    
+            setSuccess(true);
 
         } catch(err) {
             if (!err?.response) {
