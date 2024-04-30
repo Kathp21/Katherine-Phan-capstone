@@ -91,9 +91,10 @@ export default function Register({ itineraryData }) {
             password: signUpData.password
         })
 
-        if (signInResponse.status === 200) {
+        if (signInResponse.status === 201) {
             const userData = signInResponse.data.user
             localStorage.setItem('userData', JSON.stringify(userData))
+            console.log("Logged in successful")
         } else {
             setErrMsg('Sign-in failed. Please check your credentials.');
             // Optionally, you can clear the form fields to allow the user to try again
