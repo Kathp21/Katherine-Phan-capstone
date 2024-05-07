@@ -7,13 +7,15 @@ import DisplayData from './component/DisplayData/DisplayData.jsx'
 import axios from 'axios'
 import Layout from './component/Layout/Layout.jsx'
 import Login from './component/Login/Login.jsx'
-import { AuthProvider } from './component/Utilities/AuthContext.js'
+import { AuthProvider } from './component/contexts/AuthContext.js'
+import Dashboard from './component/DashBoard/DashBoard.jsx'
 
 function App() {
 
   const { REACT_APP_API_BASE_PATH } = process.env
   const [ input, setInput ] = useState()
   const [ isFirstLoad, setIsFirstLoad ] = useState(true)
+  // const { isLoggedIn, logout } = useAuth()
   
   const addUserInput = async (userInput) => {
     setIsFirstLoad(false)
@@ -36,6 +38,7 @@ function App() {
           <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>
           <Route path='/recommendations' element={<DisplayData inputData={input} isFirstLoad={isFirstLoad}/>}/>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/dashboard' element={<Dashboard/>}/>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

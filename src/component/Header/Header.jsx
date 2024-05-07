@@ -42,7 +42,7 @@ function Header() {
                         </Link> 
                     </div>
                     <div className={`header__state ${activeLink === '/login' ? 'header__active-nav-link' : 'header__inactive-nav-link'}`}>
-                        <Link to={`/login`} onClick={() => updateActiveLink('recommendations')}>
+                        <Link to={`/dashboard`} onClick={() => updateActiveLink('recommendations')}>
                             <h3 className='header__title'>User Account</h3>
                         </Link> 
                     </div>

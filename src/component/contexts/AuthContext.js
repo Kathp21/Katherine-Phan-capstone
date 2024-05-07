@@ -1,14 +1,25 @@
 // src/context/AuthContext.js
 import React, { createContext, useContext, useState } from 'react';
 
+
 const AuthContext = createContext({});
 
-// export const useAuth = () => useContext(AuthContext);
+const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => { 
-    // const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [ auth, setAuth ] = useState({})
 
+    const [ isLoggedIn, setIsLoggedIn ] = useState(!!localStorage.getItem('userId'))
+
+    const login = () => {
+        localStorage.setItem('userId', 'user_id_value_here')
+        setIsLoggedIn(true)
+    }
+
+    const logout = async () => {
+        localStorage.removeItem('userId')
+        setIsLoggedIn(false)
+    }
+    
     // useEffect(() => {
     //     const token = localStorage.getItem('authToken');
     //     if (token) {
@@ -28,10 +39,10 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ auth, setAuth }}>
+        <AuthContext.Provider value={{isLoggedIn, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-export default AuthContext;
+export default useAuth;

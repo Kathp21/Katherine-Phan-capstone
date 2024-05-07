@@ -1,9 +1,9 @@
 import './Login.scss'
 import axios from 'axios'
 import Register from '../Register /Register'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from '../Utilities/AuthContext';
+// import { useLocation, useNavigate } from 'react-router-dom'
+import { useRef, useState, useEffect } from 'react';
+import useAuth from '../contexts/AuthContext';
 
 export default function Login() {
 
@@ -11,15 +11,10 @@ export default function Login() {
 
     const [ loginData, setLoginData ] = useState({ email: '', password: ''})
 
-    const { setAuth } = useContext(AuthContext)
-    const navigate = useNavigate()
-    const location = useLocation()
-    
+    const { login } = useAuth()
+
     const userRef = useRef()
     const errRef = useRef()
-
-    // const [ user, setUser ] = useState('')
-    // const [ pwd, setPwd ] = useState('')
     const [ errMsg, setErrMsg ] = useState('')
 
     useEffect(() => {
@@ -40,15 +35,19 @@ export default function Login() {
         try {
         // STEP 1: GET JWT FROM SERVER
         const loginRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/login`, loginData)
+        const accessToken = loginRes.data.token
+
+         // Update user state in AuthContext
+        await login();
         console.log(loginRes)
         
         // STEP 2: STORING JWT IN BROWSER STORAGE - localStorage, sessionStorage, cookies
-        localStorage.setItem('authToken', loginRes.data.token)
+        localStorage.setItem('authToken', accessToken)
 
-        const accessToken = loginRes.data.token
-        setAuth({email: loginData.email, password: loginData.password, accessToken})
+        // login({email: loginData.email, password: loginData.password, accessToken})
          // Reset the loginData state to clear the form fields
         setLoginData({ email: '', password: '' });
+        setErrMsg('')
         } catch(err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -77,7 +76,7 @@ export default function Login() {
                             value={loginData.email}
                             ref={userRef}
                             onChange={e => handleLoginFormChange(e, 'email')}
-                            id='email' 
+                            id='email1' 
                             required
                         />
                     </div>
@@ -87,7 +86,7 @@ export default function Login() {
                             type='password'
                             value={loginData.password}
                             onChange={e => handleLoginFormChange(e, 'password')}
-                            id='password'
+                            id='password1'
                             required
                         />
                     </div>
