@@ -1,7 +1,7 @@
 import './Login.scss'
 import axios from 'axios'
 import Register from '../Register /Register'
-// import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../contexts/AuthContext';
 
@@ -12,6 +12,8 @@ export default function Login() {
     const [ loginData, setLoginData ] = useState({ email: '', password: ''})
 
     const { login } = useAuth()
+
+    const navigate = useNavigate()
 
     const userRef = useRef()
     const errRef = useRef()
@@ -39,11 +41,14 @@ export default function Login() {
 
          // Update user state in AuthContext
         await login();
+
+        // const { token, userData } = response.data;
+        // login(token, userData);
         console.log(loginRes)
         
         // STEP 2: STORING JWT IN BROWSER STORAGE - localStorage, sessionStorage, cookies
         localStorage.setItem('authToken', accessToken)
-
+        navigate('/dashboard')
         // login({email: loginData.email, password: loginData.password, accessToken})
          // Reset the loginData state to clear the form fields
         setLoginData({ email: '', password: '' });
@@ -72,7 +77,7 @@ export default function Login() {
                     <div>
                         <label htmlFor='email'>Email</label>
                         <input
-                            type='email'
+                            type='text'
                             value={loginData.email}
                             ref={userRef}
                             onChange={e => handleLoginFormChange(e, 'email')}
@@ -90,7 +95,7 @@ export default function Login() {
                             required
                         />
                     </div>
-                    <button>Log In</button>
+                    <button tyep="submit">Log In</button>
                 </form>
             </section>
             {/* <button onClick={handleGetProfileClick}>Get Profile</button> */}
