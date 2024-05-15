@@ -80,12 +80,28 @@ import axios from "axios";
 
 const Dashboard = () => {
     const [error, setError] = useState('');
-    const { user, logout, isLoggedIn } = useAuth();
+    const { logout, isLoggedIn } = useAuth();
     const [userData, setUserData] = useState(null);
+    const [ itineraries, setItineraries ] = useState(null)
     const navigate = useNavigate();
     const { REACT_APP_API_BASE_PATH_USER } = process.env;
 
     useEffect(() => {
+        const fetchItineraries = async (token) => {
+            try {
+                const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user/itineraries`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log(response.data)
+                setItineraries(response.data); // Set the fetched itineraries data
+            } catch (error) {
+                console.error('Error fetching itineraries:', error);
+                setError('Failed to fetch itineraries.');
+            }
+        };
+
         const fetchUserData = async (token) => {
             try {
                 const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user`, {
@@ -93,7 +109,10 @@ const Dashboard = () => {
                         Authorization: `Bearer ${token}` // Include JWT token in the request headers
                     }
                 });
+                console.log('Token:', token);
+                console.log(response.data)
                 setUserData(response.data); // Set the fetched user data
+                fetchItineraries(token)
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 setError('Failed to fetch user data.');
@@ -106,7 +125,7 @@ const Dashboard = () => {
             const token = localStorage.getItem('authToken'); // Retrieve token from localStorage
             fetchUserData(token);
         }
-    }, [isLoggedIn, navigate, REACT_APP_API_BASE_PATH_USER]); // Include dependencies in the dependency array
+    }, [isLoggedIn, navigate, REACT_APP_API_BASE_PATH_USER]); 
 
     const handleLogout = async () => {
         setError('');
@@ -127,13 +146,23 @@ const Dashboard = () => {
                     {error && <div className="alert alert-danger">{error}</div>}
                     {userData && (
                         <div>
-                            <strong>Email:</strong> {user?.email}
+                            <strong>Welcome back</strong> {userData?.first_name}
                             {/* Display other userData properties as needed */}
                         </div>
                     )}
-                    <a href="/update-profile" className="btn btn-primary w-100 mt-3">
+                    {/* <a href="/update-profile" className="btn btn-primary w-100 mt-3">
                         Update Profile
-                    </a>
+                    </a> */}
+                    {itineraries && itineraries.length > 0 && (
+                        <div>
+                            <h3>Your Itineraries:</h3>
+                            <ul>
+                                {itineraries.map(itinerary => (
+                                    <li key={itinerary.itinerary_id}>{itinerary.day_string} : {itinerary.location} - {itinerary.description}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="w-100 text-center mt-2">
