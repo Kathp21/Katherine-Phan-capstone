@@ -21,9 +21,10 @@ function App() {
     setIsFirstLoad(false)
     const url = `${REACT_APP_API_BASE_PATH}/api/chat-completion`
     try {
-        setInput(null)
-        let newInput = await axios.post(url, userInput)
-      setInput(JSON.parse(newInput.data))
+      setInput(null)
+      let newInput = await axios.post(url, userInput)
+      console.log(newInput)
+      setInput(newInput.data)
     } catch(error) {
       console.error(error)
     }
