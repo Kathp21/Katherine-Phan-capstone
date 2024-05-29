@@ -3,104 +3,48 @@ import useAuth from "../contexts/AuthContext";
 import { useNavigate } from 'react-router-dom';
 import './DashBoard.scss';
 import axios from "axios";
-
-// export default function Dashboard() {
-//     const [ error, setError ] = useState('')
-//     const { user , logout, isLoggedIn } = useAuth()
-//     const [userData, setUserData] = useState(null);
-//     const navigate = useNavigate()
-//     const { REACT_APP_API_BASE_PATH_USER } = process.env
-
-//     useEffect(() => {
-//        if(!isLoggedIn) {
-//         navigate('/login')
-//        } else{
-//         const token = localStorage.getItem('token') // Retrieve token from localStorage
-//         fetchUserData(token);
-//        }
-//     }, [isLoggedIn, fetchUserData, navigate]); // Empty dependency array to fetch data once on mount
-
-//     const fetchUserData = async (token) => {
-//         try {
-//             // Make API call to fetch user data from backend
-//             const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user`, {
-//                 headers: {
-//                     Authorization: `Bearer ${token}` // Include JWT token in the request headers
-//                 }
-//             }); 
-            
-//             const userData = response.data; // Assuming response contains user data
-            
-//             console.log(userData);
-//             setUserData(userData)
-//         } catch (error) {
-//             console.error('Error fetching user data:', error);
-//             setError('Failed to fetch user data.');
-//         }
-//     }
-
-//     // useEffect(() => {
-//     //     // Fetch user data when the Dashboard component mounts
-//     //     fetchUserData();
-//     // }, []); // Empty dependency array to fetch data once on mount
-
-
-//     async function handleLogout() {
-//         setError('')
-
-//         try {
-//             await logout()
-//             // history.push('/login')
-//             navigate('/login')
-//         } catch {
-//             setError("Failed to log in")
-//         }
-//     }
-
-//     return (
-//         <section>
-//             <div className="dashboard-card">
-//                 <div className="card-body">
-//                     <h2 className="text-center mb-4">Profile</h2>
-//                     {error && <div className="alert alert-danger">{error}</div>}
-//                     <strong>Email:</strong> {user?.email}
-//                     <a href="/update-profile" className="btn btn-primary w-100 mt-3">
-//                     Update Profile
-//                     </a>
-//                 </div>
-//                 </div>
-//                 <div className="w-100 text-center mt-2">
-//                 <button className="btn btn-link" onClick={handleLogout}>
-//                     Log Out
-//                 </button>
-//             </div>
-//         </section>
-//     )
-// }
+// import Card from "../Card/Card";
 
 const Dashboard = () => {
     const [error, setError] = useState('');
     const { logout, isLoggedIn } = useAuth();
     const [userData, setUserData] = useState(null);
-    const [ itineraries, setItineraries ] = useState(null)
+    // const [ itineraries, setItineraries ] = useState(null)
+    const [ titles, setTitles ] = useState(null)
+    
     const navigate = useNavigate();
     const { REACT_APP_API_BASE_PATH_USER } = process.env;
 
     useEffect(() => {
-        const fetchItineraries = async (token) => {
+        // const fetchItineraries = async (token) => {
+        //     try {
+        //         const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user/itineraries`, {
+        //             headers: {
+        //                 Authorization: `Bearer ${token}`
+        //             }
+        //         });
+        //         console.log(response.data)
+        //         setItineraries(response.data) // Set the fetched itineraries data
+        //     } catch (error) {
+        //         console.error('Error fetching itineraries:', error)
+        //         setError('Failed to fetch itineraries.')
+        //     }
+        // };
+
+        const fetchItineraryTitle = async (token) => {
             try {
-                const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user/itineraries`, {
+                const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user/itinerary-title`, {
                     headers: {
-                        Authorization: `Bearer ${token}`
+                        Authorization: `Bearer ${token}` // Include JWT token in the request headers
                     }
-                });
+                })
                 console.log(response.data)
-                setItineraries(response.data); // Set the fetched itineraries data
+                setTitles(response.data)
             } catch (error) {
-                console.error('Error fetching itineraries:', error);
-                setError('Failed to fetch itineraries.');
+                console.error('Error fetching titles:', error)
+                setError('Failed to fetch titles.')
             }
-        };
+        }
 
         const fetchUserData = async (token) => {
             try {
@@ -108,31 +52,61 @@ const Dashboard = () => {
                     headers: {
                         Authorization: `Bearer ${token}` // Include JWT token in the request headers
                     }
-                });
+                })
                 console.log('Token:', token);
                 console.log(response.data)
                 setUserData(response.data); // Set the fetched user data
-                fetchItineraries(token)
+                // fetchItineraries(token)
+                fetchItineraryTitle(token)
             } catch (error) {
-                console.error('Error fetching user data:', error);
-                setError('Failed to fetch user data.');
+                console.error('Error fetching user data:', error)
+                setError('Failed to fetch user data.')
             }
-        };
+        }
 
         if (!isLoggedIn) {
-            navigate('/login');
+            navigate('/login')
         } else {
             const token = localStorage.getItem('authToken'); // Retrieve token from localStorage
-            fetchUserData(token);
+            fetchUserData(token)
         }
     }, [isLoggedIn, navigate, REACT_APP_API_BASE_PATH_USER]); 
 
+    // const handleTitleClick = async (recommendation_id) => {
+    //     try {
+    //         const token = localStorage.getItem('authToken');
+    //         const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user/itinerary-details/${recommendation_id}`, {
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': `Bearer ${token}`
+    //             }
+    //         });
+    //         setSelectedItinerary(response.data);
+    //     } catch (error) {
+    //         console.error('Error fetching itinerary details:', error);
+    //         if (error.response) {
+    //             console.error('Response data:', error.response.data);
+    //             console.error('Response status:', error.response.status);
+    //             console.error('Response headers:', error.response.headers);
+    //         } else if (error.request) {
+    //             console.error('Request data:', error.request);
+    //         } else {
+    //             console.error('Error message:', error.message);
+    //         }
+    //         setError('Failed to fetch itinerary details.');
+    //     }
+    // };
+    
+    const handleTitleClick = (recommendation_id) => {
+        navigate(`/itinerary-details/${recommendation_id}`);
+    }
+
     const handleLogout = async () => {
-        setError('');
+        setError('')
 
         try {
-            await logout();
-            navigate('/login');
+            await logout()
+            navigate('/login')
         } catch {
             setError('Failed to log out');
         }
@@ -153,18 +127,26 @@ const Dashboard = () => {
                     {/* <a href="/update-profile" className="btn btn-primary w-100 mt-3">
                         Update Profile
                     </a> */}
-                    {itineraries && itineraries.length > 0 && (
+                    {titles && titles.length > 0 && (
                         <div>
                             <h3>Your Itineraries:</h3>
                             <ul>
-                                {itineraries.map(itinerary => (
-                                    <li key={itinerary.itinerary_id}>{itinerary.day_string} : {itinerary.location} - {itinerary.description}</li>
+                                {titles.map(title => (
+                                    <li key={title.recommendation_id} onClick={() => handleTitleClick(title.recommendation_id)}>{title.title}</li>
                                 ))}
                             </ul>
                         </div>
                     )}
                 </div>
             </div>
+            {/* {selectedItinerary && (
+                <div>
+                    <h4>Itinerary Details:</h4>
+                    {selectedItinerary.map(day => (
+                    <Card key={day.id} day={day} /> // Adjust key if necessary
+                    ))}
+                </div>
+            )} */}
             <div className="w-100 text-center mt-2">
                 <button className="btn btn-link" onClick={handleLogout}>
                     Log Out

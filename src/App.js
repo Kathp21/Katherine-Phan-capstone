@@ -9,6 +9,7 @@ import Layout from './component/Layout/Layout.jsx'
 import Login from './component/Login/Login.jsx'
 import { AuthProvider } from './component/contexts/AuthContext.js'
 import Dashboard from './component/DashBoard/DashBoard.jsx'
+import ItineraryDetails from './component/ItineraryDetails/ItineraryDetails.jsx'
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
           <Route path='/recommendations' element={<DisplayData inputData={input} isFirstLoad={isFirstLoad}/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/itinerary-details/:recommendation_id' element={<ItineraryDetails/>}/>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
