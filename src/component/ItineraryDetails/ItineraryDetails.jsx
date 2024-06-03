@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Card from "../Card/Card";
 
@@ -8,6 +8,8 @@ const ItineraryDetails = () => {
     const [itineraryDetails, setItineraryDetails] = useState([]);
     const [error, setError] = useState('');
     const { REACT_APP_API_BASE_PATH_USER } = process.env;
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchItineraryDetails = async () => {
@@ -28,6 +30,10 @@ const ItineraryDetails = () => {
         fetchItineraryDetails();
     }, [recommendation_id, REACT_APP_API_BASE_PATH_USER]);
 
+    const handleBackButton = () => {
+        navigate('/dashboard')
+    }
+
     return (
         <div>
             <h2>Itinerary Details</h2>
@@ -35,6 +41,7 @@ const ItineraryDetails = () => {
             {itineraryDetails.map(day => (
                 <Card key={day.id} day={day} />
             ))}
+            <button onClick={handleBackButton}>Back</button>
         </div>
     );
 };

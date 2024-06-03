@@ -4,6 +4,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
 import './Register.scss';
+import useAuth from '../contexts/AuthContext';
 // import userAxios from '../api/axios';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -12,6 +13,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 export default function Register({ itineraryData }) {
     const userRef = useRef()
     const errRef = useRef()
+    const {login} = useAuth()
 
     const { REACT_APP_API_BASE_PATH_USER } = process.env
     const [ signUpData, setSignUpData ] = useState({
@@ -29,6 +31,7 @@ export default function Register({ itineraryData }) {
 
     const [ errMsg, setErrMsg ] = useState('')
     const [ success, setSuccess ] = useState(false)
+    const [ showSaveButton, setShowSaveButton ] = useState(false)
 
     useEffect(() => {
         userRef.current.focus()
@@ -60,16 +63,19 @@ export default function Register({ itineraryData }) {
             return
         }
         // ADD USER TO DATABASE
-        try { const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/register`, signUpData)
+        try{ 
+            const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/register`, signUpData)
             console.log(signUpData)
             console.log(signUpRes)
 
         // Assuming the server responds with a JWT token on successful registration
         const { token } = signUpRes.data;
 
-        console.log("Itinerary Data to Save:", itineraryData);
+        console.log("Itinerary Data to Save:", itineraryData)
 
-        localStorage.setItem('authToken', signUpRes.data.token)
+        localStorage.setItem('authToken', token)
+        login(token)
+
         // Save the itinerary after successful registration
 
         if (itineraryData) {
@@ -94,7 +100,7 @@ export default function Register({ itineraryData }) {
         if (signInResponse.status === 201) {
             const userData = signInResponse.data.user
             localStorage.setItem('userData', JSON.stringify(userData))
-            console.log("Logged in successful")
+            setShowSaveButton(true)
         } else {
             setErrMsg('Sign-in failed. Please check your credentials.');
             // Optionally, you can clear the form fields to allow the user to try again
@@ -106,16 +112,7 @@ export default function Register({ itineraryData }) {
             })
         }
 
-        // try {
-        //     const signUpRes = await apiClient.post('/register', signUpData);
-        //     localStorage.setItem('authToken', signUpRes.data.token);
-    
-        //     if (itineraryData) {
-        //         const saveItineraryResponse = await apiClient.post('/save-itinerary', itineraryData);
-        //         console.log('Itinerary saved successfully:', saveItineraryResponse.data);
-        //     }
-    
-            setSuccess(true);
+        setSuccess(true);
 
         } catch(err) {
             if (!err?.response) {
@@ -129,6 +126,20 @@ export default function Register({ itineraryData }) {
         }
     }
 
+    const handleSaveItineraryButton = async () => {
+        const token = localStorage.getItem('authToken')
+        try{
+            const itineraries = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/save-itinerary`, itineraryData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log('Itinerary saved successfully:', itineraries.data )
+        } catch (error) {
+            console.error('Error saving itinerary:', error.response ? error.response.data : error.message);
+        }
+    }
+
     return (
         <> 
             {success ? (
@@ -137,6 +148,9 @@ export default function Register({ itineraryData }) {
                     <p>
                         <a href="#">Sign In</a>
                     </p>
+                    {showSaveButton && (
+                        <button onClick={handleSaveItineraryButton}>Save Itinerary</button>
+                    )}
                 </section>
             ):(
                 <section>

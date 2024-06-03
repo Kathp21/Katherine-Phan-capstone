@@ -116,12 +116,10 @@ const Dashboard = () => {
         <section>
             <div className="dashboard-card">
                 <div className="card-body">
-                    <h2 className="text-center mb-4">Profile</h2>
                     {error && <div className="alert alert-danger">{error}</div>}
                     {userData && (
                         <div>
-                            <strong>Welcome back</strong> {userData?.first_name}
-                            {/* Display other userData properties as needed */}
+                            Welcome back <strong>{userData?.first_name}</strong>
                         </div>
                     )}
                     {/* <a href="/update-profile" className="btn btn-primary w-100 mt-3">
