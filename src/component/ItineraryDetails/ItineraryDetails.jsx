@@ -39,7 +39,7 @@ const ItineraryDetails = () => {
             <h2>Itinerary Details</h2>
             {error && <div className="alert alert-danger">{error}</div>}
             {itineraryDetails.map(day => (
-                <Card key={day.id} day={day} />
+                <Card key={day.recommendation_id} day={day} />
             ))}
             <button onClick={handleBackButton}>Back</button>
         </div>

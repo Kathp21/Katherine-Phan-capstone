@@ -11,9 +11,9 @@ const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 export default function Register({ itineraryData }) {
-    const userRef = useRef()
-    const errRef = useRef()
-    const {login} = useAuth()
+    const userRef = useRef(null)
+    const errRef = useRef(null)
+    const { isLoggedIn, login} = useAuth()
 
     const { REACT_APP_API_BASE_PATH_USER } = process.env
     const [ signUpData, setSignUpData ] = useState({
@@ -31,11 +31,13 @@ export default function Register({ itineraryData }) {
 
     const [ errMsg, setErrMsg ] = useState('')
     const [ success, setSuccess ] = useState(false)
-    const [ showSaveButton, setShowSaveButton ] = useState(false)
+    // const [ showSaveButton, setShowSaveButton ] = useState(false)
 
     useEffect(() => {
-        userRef.current.focus()
-    }, [])
+        if (userRef.current) {
+            userRef.current.focus();
+        }
+    }, []);
 
     useEffect(() => {
        setValidEmail(EMAIL_REGEX.test(signUpData.email))
@@ -100,7 +102,7 @@ export default function Register({ itineraryData }) {
         if (signInResponse.status === 201) {
             const userData = signInResponse.data.user
             localStorage.setItem('userData', JSON.stringify(userData))
-            setShowSaveButton(true)
+            // setShowSaveButton(true)
         } else {
             setErrMsg('Sign-in failed. Please check your credentials.');
             // Optionally, you can clear the form fields to allow the user to try again
@@ -142,17 +144,12 @@ export default function Register({ itineraryData }) {
 
     return (
         <> 
-            {success ? (
+            {isLoggedIn ? (
                 <section>
-                    <h1>Success!</h1>
-                    <p>
-                        <a href="#">Sign In</a>
-                    </p>
-                    {showSaveButton && (
-                        <button onClick={handleSaveItineraryButton}>Save Itinerary</button>
-                    )}
+                    <h1>Save Your Itinerary</h1>
+                    <button onClick={handleSaveItineraryButton}>Save Itinerary</button>
                 </section>
-            ):(
+            ) : (
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
                     <h1>Register</h1>
