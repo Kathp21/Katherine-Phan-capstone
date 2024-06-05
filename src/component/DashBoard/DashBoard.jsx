@@ -16,21 +16,6 @@ const Dashboard = () => {
     const { REACT_APP_API_BASE_PATH_USER } = process.env;
 
     useEffect(() => {
-        // const fetchItineraries = async (token) => {
-        //     try {
-        //         const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user/itineraries`, {
-        //             headers: {
-        //                 Authorization: `Bearer ${token}`
-        //             }
-        //         });
-        //         console.log(response.data)
-        //         setItineraries(response.data) // Set the fetched itineraries data
-        //     } catch (error) {
-        //         console.error('Error fetching itineraries:', error)
-        //         setError('Failed to fetch itineraries.')
-        //     }
-        // };
-
         const fetchItineraryTitle = async (token) => {
             try {
                 const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user/itinerary-title`, {
@@ -71,31 +56,6 @@ const Dashboard = () => {
             fetchUserData(token)
         }
     }, [isLoggedIn, navigate, REACT_APP_API_BASE_PATH_USER]); 
-
-    // const handleTitleClick = async (recommendation_id) => {
-    //     try {
-    //         const token = localStorage.getItem('authToken');
-    //         const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user/itinerary-details/${recommendation_id}`, {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': `Bearer ${token}`
-    //             }
-    //         });
-    //         setSelectedItinerary(response.data);
-    //     } catch (error) {
-    //         console.error('Error fetching itinerary details:', error);
-    //         if (error.response) {
-    //             console.error('Response data:', error.response.data);
-    //             console.error('Response status:', error.response.status);
-    //             console.error('Response headers:', error.response.headers);
-    //         } else if (error.request) {
-    //             console.error('Request data:', error.request);
-    //         } else {
-    //             console.error('Error message:', error.message);
-    //         }
-    //         setError('Failed to fetch itinerary details.');
-    //     }
-    // };
     
     const handleTitleClick = (recommendation_id) => {
         navigate(`/itinerary-details/${recommendation_id}`);
@@ -128,23 +88,15 @@ const Dashboard = () => {
                     {titles && titles.length > 0 && (
                         <div>
                             <h3>Your Itineraries:</h3>
-                            <ul>
+                            <ol type="1" className="itinerary-list">
                                 {titles.map(title => (
-                                    <li key={title.recommendation_id} onClick={() => handleTitleClick(title.recommendation_id)}>{title.title}</li>
+                                    <li className="itinerary-list__items" key={title.recommendation_id} onClick={() => handleTitleClick(title.recommendation_id)}>{title.title}</li>
                                 ))}
-                            </ul>
+                            </ol>
                         </div>
                     )}
                 </div>
             </div>
-            {/* {selectedItinerary && (
-                <div>
-                    <h4>Itinerary Details:</h4>
-                    {selectedItinerary.map(day => (
-                    <Card key={day.id} day={day} /> // Adjust key if necessary
-                    ))}
-                </div>
-            )} */}
             <div className="w-100 text-center mt-2">
                 <button className="btn btn-link" onClick={handleLogout}>
                     Log Out

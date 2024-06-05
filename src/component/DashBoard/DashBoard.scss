@@ -50,3 +50,10 @@
     text-decoration: underline;
   }
   
+  .itinerary-list {
+    padding: 1rem;
+
+    &__items {
+      padding: 0.5rem;
+    }
+  }

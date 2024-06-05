@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Card from "../Card/Card";
+import './ItineraryDetails.scss';
 
 const ItineraryDetails = () => {
     const { recommendation_id } = useParams();
@@ -35,14 +36,26 @@ const ItineraryDetails = () => {
     }
 
     return (
-        <div>
+        <main>
             <h2>Itinerary Details</h2>
-            {error && <div className="alert alert-danger">{error}</div>}
-            {itineraryDetails.map(day => (
-                <Card key={day.recommendation_id} day={day} />
-            ))}
-            <button onClick={handleBackButton}>Back</button>
-        </div>
+            <section className="itinerary-details">
+                <div className="itinerary-details__container">
+                    <h4 className="itinerary-details__row-heading">Day</h4>
+                    <h4 className="itinerary-details__row-heading">Destination</h4>
+                    <h4 className="itinerary-details__row-heading">Budget</h4>
+                    <h4 className="itinerary-details__row-heading">Description</h4>
+                </div>
+                <div>
+                    {error && <div className="alert alert-danger">{error}</div>}
+                    {itineraryDetails.map(day => (
+                        <Card key={day.recommendation_id} day={day} />
+                    ))}  
+                </div>
+                <div className="itinerary-details__button">
+                    <button onClick={handleBackButton}>Back</button>
+                </div>
+            </section>
+        </main>
     );
 };
 
