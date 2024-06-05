@@ -12,6 +12,7 @@ import Dashboard from './component/DashBoard/DashBoard.jsx'
 import ItineraryDetails from './component/ItineraryDetails/ItineraryDetails.jsx'
 import AuthStatus from './component/AuthStatus/AuthStatus.js'
 import PrivateRoute from './component/PrivateRoute/PrivateRoute.js'
+import Register from './component/Register /Register.jsx'
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
           <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>
           <Route path='/recommendations' element={<DisplayData inputData={input} isFirstLoad={isFirstLoad}/>}/>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/signup' element={<Register/>}/>
           <Route element={<PrivateRoute />}>
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/itinerary-details/:recommendation_id' element={<ItineraryDetails />} />
