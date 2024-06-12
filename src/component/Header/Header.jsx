@@ -83,7 +83,7 @@ function Header() {
         <header className='header'>
             <section className='header__container'>
                 <nav className='header__logo-container'>
-                    <Link to={`/`} onClick={() => updateActiveLink('/')}>
+                    <Link to={`/`} onClick={() => updateActiveLink('/')} className='header__logo-link'>
                         <img src={logo} alt='travel logo' className='header__logo' />
                         <span className='header__web-title'>Trip Crafters</span>
                     </Link>
