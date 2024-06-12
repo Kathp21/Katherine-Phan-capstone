@@ -1,3 +1,6 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
 .login {
     display: flex;
     justify-content: center;
@@ -17,7 +20,7 @@
     }
 
     &__info {
-        background: white;
+        background: $white;
         box-shadow: 0 0 2em #e6e9f9;
         padding: 1em;
         display: flex;

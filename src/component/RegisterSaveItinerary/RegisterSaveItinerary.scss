@@ -1,0 +1,77 @@
+a, a:visited {
+    color: #0b0a0a;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  font-size: 22px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+label {
+  margin-top: 1rem;
+}
+
+.register__button {
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+.register__form-box {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+}
+
+.register__email {
+    padding-right: 1.7rem;
+}
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
+    margin-left: 0.5rem;
+    // text-decoration: underline;
+}

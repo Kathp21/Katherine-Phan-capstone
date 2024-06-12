@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import './Register.scss';
 import useAuth from '../contexts/AuthContext';
 // import userAxios from '../api/axios';
+import { faEnvelope, faEye } from '@fortawesome/free-regular-svg-icons';
+import { faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -30,7 +33,7 @@ export default function Register({ itineraryData }) {
     const [ passwordFocus, setPasswordFocus ] = useState(false)
 
     const [ errMsg, setErrMsg ] = useState('')
-    const [ success, setSuccess ] = useState(false)
+    // const [ success, setSuccess ] = useState(false)
     // const [ showSaveButton, setShowSaveButton ] = useState(false)
 
     useEffect(() => {
@@ -114,7 +117,7 @@ export default function Register({ itineraryData }) {
             })
         }
 
-        setSuccess(true);
+        // setSuccess(true);
 
         } catch(err) {
             if (!err?.response) {
@@ -128,106 +131,122 @@ export default function Register({ itineraryData }) {
         }
     }
 
-    const handleSaveItineraryButton = async () => {
-        const token = localStorage.getItem('authToken')
-        try{
-            const itineraries = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/save-itinerary`, itineraryData, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            console.log('Itinerary saved successfully:', itineraries.data )
-        } catch (error) {
-            console.error('Error saving itinerary:', error.response ? error.response.data : error.message);
-        }
-    }
+    // const handleSaveItineraryButton = async () => {
+    //     const token = localStorage.getItem('authToken')
+    //     try{
+    //         const itineraries = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/save-itinerary`, itineraryData, {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`
+    //             }
+    //         })
+    //         console.log('Itinerary saved successfully:', itineraries.data )
+    //     } catch (error) {
+    //         console.error('Error saving itinerary:', error.response ? error.response.data : error.message);
+    //     }
+    // }
 
     return (
         <> 
             {isLoggedIn ? (
                 <section>
-                    <h1>Save Your Itinerary</h1>
-                    <button onClick={handleSaveItineraryButton}>Save Itinerary</button>
+                    <Link to='/'></Link>
+                    {/* <h1>Save Your Itinerary</h1>
+                    <button onClick={handleSaveItineraryButton}>Save Itinerary</button> */}
                 </section>
             ) : (
-                <section>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
-                    <h1>Register</h1>
-                    <form onSubmit={handleSignUpSubmit}>
-                        <div className='register__form-box'>
-                            <label htmlFor='firtName'>First Name</label>
-                            <input
-                                type='text'
-                                value={signUpData.first_name}
-                                onChange={e => handleSignUpFormChange(e, 'first_name')}
-                                id='firstName' />
-                        </div>
-                        <div className='register__form-box'>
-                            <label htmlFor='lastName'>Last Name</label>
-                            <input
-                                type='text'
-                                value={signUpData.last_name}
-                                onChange={e => handleSignUpFormChange(e, 'last_name')}
-                                id='lastName' />
-                        </div>
-                        <div className='register__form-box'>
-                            <label htmlFor='email' className='register__email'>
-                                Email:
-                                <FontAwesomeIcon icon={faCheck} className={validEmail ? 'valid' : "hide"}/>
-                                <FontAwesomeIcon icon={faTimes} className={validEmail || !signUpData.email ? 'hide' : 'valid'}/>
-                            </label>
-                            <input
-                                type="text"
-                                id="email"
-                                ref={userRef}
-                                autoComplete="off"
-                                onChange={e => handleSignUpFormChange(e, 'email')}
-                                value={signUpData.email}
-                                required
-                                aria-invalid={validEmail ? "false" : "true"}
-                                aria-describedby="uidnote"
-                                onFocus={() => setEmailFocus(true)}
-                                onBlur={() => setEmailFocus(false)}
-                            />
-                            <p id='uidnote' className={emailFocus && signUpData.email && !validEmail ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
-                            This not a valid email address.
-                            </p>
-                        </div>
-                        <div className='register__form-box'>
-                            <label htmlFor="password">
-                                Password:
-                                <FontAwesomeIcon icon={faCheck} className={validPassword ? "valid" : "hide"} />
-                                <FontAwesomeIcon icon={faTimes} className={validPassword || !signUpData.password ? "hide" : "invalid"} />
-                            </label>
-                            <input
-                                type="password"
-                                id="password"
-                                onChange={e => handleSignUpFormChange(e, 'password')}
-                                value={signUpData.password}
-                                required
-                                aria-invalid={validPassword ? "false" : "true"}
-                                aria-describedby="pwdnote"
-                                onFocus={() => setPasswordFocus(true)}
-                                onBlur={() => setPasswordFocus(false)}
-                            />
-                            <p id="pwdnote" className={passwordFocus && !validPassword ? "instructions" : "offscreen"}>
-                                <FontAwesomeIcon icon={faInfoCircle} />
-                                8 to 24 characters.<br />
-                                Must include uppercase and lowercase letters, a number and a special character.<br />
-                                Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                            </p>
-                        </div>
-                        <button className="register__button" disabled={!validEmail || !validPassword ? true : false}>Sign Up</button>
-                    </form>
-                    <p>
-                        Already registered?
-                        <span className="line">
-                            {/*put router link here*/}
-                            <Link to='/Login'>Sign In</Link>
-                            {/* <a href="#">Sign In</a> */}
-                        </span>
-                    </p>
+                <section className='register'>
+                    <div className='register__container'>
+                        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
+                        <h1>Register</h1>
+                        <form onSubmit={handleSignUpSubmit} className='register__form-container'>
+                            <div className='register__form-box'>
+                                <label htmlFor='firstName'>First Name</label>
+                                <div className='register__input-container'>
+                                    <FontAwesomeIcon icon={faUser} className="register__icon" />
+                                    <input
+                                        type='text'
+                                        value={signUpData.first_name}
+                                        onChange={e => handleSignUpFormChange(e, 'first_name')}
+                                        id='firstName' 
+                                        placeholder='Enter your first name'
+                                    />        
+                                </div>    
+                            </div>
+                            <div className='register__form-box'>
+                                <label htmlFor='lastName'>Last Name</label>
+                                <div className='register__input-container'>
+                                    <FontAwesomeIcon icon={faUser} className="register__icon" />
+                                    <input
+                                        type='text'
+                                        value={signUpData.last_name}
+                                        onChange={e => handleSignUpFormChange(e, 'last_name')}
+                                        id='lastName' 
+                                        placeholder='Enter your last name'
+                                    />
+                                </div>
+                            </div>
+                            <div className='register__form-box'>
+                                <label htmlFor='email' className='register__email'>
+                                    Email:
+                                    <FontAwesomeIcon icon={faCheck} className={validEmail ? 'valid' : "hide"}/>
+                                    <FontAwesomeIcon icon={faTimes} className={validEmail || !signUpData.email ? 'hide' : 'valid'}/>
+                                </label>
+                                <div className='register__input-container'>
+                                    <FontAwesomeIcon icon={faEnvelope} className="register__icon" />
+                                    <input
+                                        type="text"
+                                        id="email"
+                                        ref={userRef}
+                                        autoComplete="off"
+                                        onChange={e => handleSignUpFormChange(e, 'email')}
+                                        value={signUpData.email}
+                                        required
+                                        aria-invalid={validEmail ? "false" : "true"}
+                                        aria-describedby="uidnote"
+                                        onFocus={() => setEmailFocus(true)}
+                                        onBlur={() => setEmailFocus(false)}
+                                        placeholder='Enter your email'
+                                    />
+                                    <p id='uidnote' className={emailFocus && signUpData.email && !validEmail ? "instructions" : "offscreen"}>
+                                    <FontAwesomeIcon icon={faInfoCircle} />
+                                    This not a valid email address.
+                                    </p>
+                                </div>
+                            </div>
+                            <div className='register__form-box'>
+                                <label htmlFor="password">
+                                    Password:
+                                    <FontAwesomeIcon icon={faCheck} className={validPassword ? "valid" : "hide"} />
+                                    <FontAwesomeIcon icon={faTimes} className={validPassword || !signUpData.password ? "hide" : "invalid"} />
+                                </label>
+                                <div className='register__input-container'>
+                                    <FontAwesomeIcon icon={faLock} className="register__icon" />
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        onChange={e => handleSignUpFormChange(e, 'password')}
+                                        value={signUpData.password}
+                                        required
+                                        aria-invalid={validPassword ? "false" : "true"}
+                                        aria-describedby="pwdnote"
+                                        onFocus={() => setPasswordFocus(true)}
+                                        onBlur={() => setPasswordFocus(false)}
+                                        placeholder='Enter your password'
+                                    />
+                                    <p id="pwdnote" className={passwordFocus && !validPassword ? "instructions" : "offscreen"}>
+                                        <FontAwesomeIcon icon={faInfoCircle} />
+                                        8 to 24 characters.<br />
+                                        Must include uppercase and lowercase letters, a number and a special character.<br />
+                                        Allowed special characters: 
+                                        <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> 
+                                        <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> 
+                                        <span aria-label="percent">%</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <button className="register__button" disabled={!validEmail || !validPassword ? true : false}>Sign Up</button>
+                        </form>
+                    </div>
                 </section>
             )
         }

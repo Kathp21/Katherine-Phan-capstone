@@ -1,3 +1,6 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
 a, a:visited {
     color: #0b0a0a;
 }
@@ -5,24 +8,96 @@ a, a:visited {
 input[type="text"],
 input[type="password"],
 textarea {
-  font-size: 22px;
-  padding: 0.25rem;
+//   font-size: 22px;
+//   padding: 0.25rem;
   border-radius: 0.5rem;
+//   width: 100%;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+
+  &:focus {
+      outline: none;
+      border-color: #888;
+  }
 }
+
+.register {
+    display: flex;
+    justify-content: center;
+
+    &__container {
+        background: #f1f7fe;
+        padding: 2rem;
+        border-radius: 30px;
+        box-shadow: 0 0 2em #e6e9f9;
+    }
+
+    &__form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    &__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 20px;
+        background-color: #3b5998;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    
+        &:hover {
+            background-color: #333;
+        }
+    }
+
+}
+
+.register__input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .register__icon {
+        position: absolute;
+        left: 10px;
+        color: #888;
+    }
+}
+
 
 label {
-  margin-top: 1rem;
+    display: block;
+    font-weight: bold;
+    margin-top: 0;
 }
 
-.register__button {
-  padding: 0.5rem;
-  margin-top: 1rem;
-}
+
 
 .register__form-box {
+    background: $white;
+    box-shadow: 0 0 2em #e6e9f9;
+    padding: 1rem;
     display: flex;
-    gap: 0.5rem;
-    align-items: baseline;
+    flex-direction: column;
+    gap: 0.5em;
+    border-radius: 20px;
+    color: #4d4d4d;
+    margin-bottom: 1rem;
+    text-align: left;
+
+    @include tablet {
+        padding: 1.5rem;
+    }
 }
 
 .register__email {
@@ -37,6 +112,11 @@ label {
     padding: 0.25rem;
     position: relative;
     bottom: -10px;
+    width: 100%;
+
+    @include tablet {
+        width: 14rem;
+    }
 }
 
 .instructions > svg {
