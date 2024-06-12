@@ -8,10 +8,7 @@ a, a:visited {
 input[type="text"],
 input[type="password"],
 textarea {
-//   font-size: 22px;
-//   padding: 0.25rem;
   border-radius: 0.5rem;
-//   width: 100%;
   padding: 10px 10px 10px 35px;
   border: 1px solid #ddd;
   font-size: 1rem;
@@ -66,10 +63,12 @@ textarea {
     position: relative;
     display: flex;
     align-items: center;
+    flex-direction: column;
 
     .register__icon {
         position: absolute;
         left: 10px;
+        top:11px;
         color: #888;
     }
 }
