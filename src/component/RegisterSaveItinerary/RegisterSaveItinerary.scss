@@ -1,3 +1,6 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
 a, a:visited {
     color: #0b0a0a;
 }
@@ -11,22 +14,59 @@ textarea {
 }
 
 label {
-  margin-top: 1rem;
+    display: block;
+    font-weight: bold;
+    margin-top: 0;
 }
 
-.register__button {
-  padding: 0.5rem;
-  margin-top: 1rem;
+.register-save-itinerary{
+    padding: 0 1.5rem;
+
+    @include tablet {
+        padding: 0;
+    }
+
+    &__form-box {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: baseline;
+        margin-bottom: 8px;
+
+        @include tablet {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
 }
 
-.register__form-box {
+.register-save-itinerary__email{
+    padding-right: 2rem;
+}
+
+.register-save-itinerary__button {
+    margin-top: 1.5rem;
+}
+
+
+.register-save-itinerary__button {
     display: flex;
-    gap: 0.5rem;
-    align-items: baseline;
-}
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 20px;
+    background-color: #3b5998;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 7rem;
 
-.register__email {
-    padding-right: 1.7rem;
+    &:hover {
+        background-color: #333;
+    }
 }
 
 .instructions {

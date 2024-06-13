@@ -3,14 +3,14 @@ import axios from 'axios'
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
-import './RegisterSaveItinerary.scss';
+import './RegisterSaveItinerary.scss'
 import useAuth from '../contexts/AuthContext';
 // import userAxios from '../api/axios';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-export default function Register({ itineraryData }) {
+export default function RegisterSaveItinerary({ itineraryData }) {
     const userRef = useRef(null)
     const errRef = useRef(null)
     const { isLoggedIn, login} = useAuth()
@@ -150,11 +150,12 @@ export default function Register({ itineraryData }) {
                     <button onClick={handleSaveItineraryButton}>Save Itinerary</button>
                 </section>
             ) : (
-                <section>
+                <section className='register-save-itinerary'>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
                     <h1>Register</h1>
                     <form onSubmit={handleSignUpSubmit}>
-                        <div className='register__form-box'>
+
+                        <div className='register-save-itinerary__form-box'>
                             <label htmlFor='firtName'>First Name</label>
                             <input
                                 type='text'
@@ -162,7 +163,7 @@ export default function Register({ itineraryData }) {
                                 onChange={e => handleSignUpFormChange(e, 'first_name')}
                                 id='firstName' />
                         </div>
-                        <div className='register__form-box'>
+                        <div className='register-save-itinerary__form-box'>
                             <label htmlFor='lastName'>Last Name</label>
                             <input
                                 type='text'
@@ -170,8 +171,9 @@ export default function Register({ itineraryData }) {
                                 onChange={e => handleSignUpFormChange(e, 'last_name')}
                                 id='lastName' />
                         </div>
-                        <div className='register__form-box'>
-                            <label htmlFor='email' className='register__email'>
+
+                        <div className='register-save-itinerary__form-box'>
+                            <label htmlFor='email' className='register-save-itinerary__email'>
                                 Email:
                                 <FontAwesomeIcon icon={faCheck} className={validEmail ? 'valid' : "hide"}/>
                                 <FontAwesomeIcon icon={faTimes} className={validEmail || !signUpData.email ? 'hide' : 'valid'}/>
@@ -194,7 +196,7 @@ export default function Register({ itineraryData }) {
                             This not a valid email address.
                             </p>
                         </div>
-                        <div className='register__form-box'>
+                        <div className='register-save-itinerary__form-box'>
                             <label htmlFor="password">
                                 Password:
                                 <FontAwesomeIcon icon={faCheck} className={validPassword ? "valid" : "hide"} />
@@ -218,7 +220,9 @@ export default function Register({ itineraryData }) {
                                 Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                             </p>
                         </div>
-                        <button className="register__button" disabled={!validEmail || !validPassword ? true : false}>Sign Up</button>
+                        <div className="register-save-itinerary__button-container">
+                            <button className="register-save-itinerary__button" disabled={!validEmail || !validPassword ? true : false}>Sign Up</button>
+                        </div>
                     </form>
                     <p>
                         Already registered?

@@ -8,13 +8,19 @@ import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 function Header() {
     const [activeLink, setActiveLink] = useState('')
     const [ menuOpen, setMenuOpen ] = useState(false)
-    const [ isDesktop, setIsDesktop ] = useState(window.innerWidth >= 768)
+    // const [ isDesktop, setIsDesktop ] = useState(window.innerWidth >= 768)
     const location = useLocation();
 
+    // const updateActiveLink = (linkName) => {
+    //     if(isDesktop) {
+    //         setActiveLink(linkName)
+    //     }
+
+    //     setMenuOpen(false) //Close menu when a link is clicked
+    // }
+
     const updateActiveLink = (linkName) => {
-        if(isDesktop) {
-            setActiveLink(linkName)
-        }
+        setActiveLink(linkName)
         setMenuOpen(false) //Close menu when a link is clicked
     }
 
@@ -22,20 +28,24 @@ function Header() {
         setMenuOpen(prevState => !prevState)
     }
 
-    const handleResize = () => {
-        setIsDesktop(window.innerWidth >= 768)
-    }
+    // const handleResize = () => {
+    //     setIsDesktop(window.innerWidth >= 768)
+    // }
+
+    // useEffect(() => {
+    //     window.addEventListener('resize', handleResize)
+    //     return () => window.removeEventListener('resize', handleResize)
+    // }, [])
+
+    // useEffect(() => {
+    //     if(isDesktop) {
+    //         setActiveLink(location.pathname)
+    //     }
+    // }, [location.pathname, isDesktop])
 
     useEffect(() => {
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
-
-    useEffect(() => {
-        if(isDesktop) {
-            setActiveLink(location.pathname)
-        }
-    }, [location.pathname, isDesktop])
+        setActiveLink(location.pathname)
+    }, [location.pathname])
 
 
 //     return (
@@ -94,22 +104,22 @@ function Header() {
                     />
                 </nav>
                 <section className={`header__nav-link ${menuOpen ? 'header__nav-link--open' : ''}`}>
-                    <div className={`header__state ${activeLink === '/' && isDesktop ? 'header__active-nav-link' : ''}`}>
+                    <div className={`header__state ${activeLink === '/' ? 'header__active-nav-link' : ''}`}>
                         <Link to={`/`} onClick={() => updateActiveLink('/')}>
                             <h3 className='header__title'>User Input</h3>
                         </Link>
                     </div>
-                    <div className={`header__state ${activeLink === '/recommendations' && isDesktop ? 'header__active-nav-link' : ''}`}>
+                    <div className={`header__state ${activeLink === '/recommendations' ? 'header__active-nav-link' : ''}`}>
                         <Link to={`/recommendations`} onClick={() => updateActiveLink('/recommendations')}>
                             <h3 className='header__title'>Travel Plan</h3>
                         </Link>
                     </div>
-                    <div className={`header__state ${activeLink === '/login' && isDesktop ? 'header__active-nav-link' : ''}`}>
+                    <div className={`header__state ${activeLink === '/login' ? 'header__active-nav-link' : ''}`}>
                         <Link to={`/login`} onClick={() => updateActiveLink('/login')}>
                             <h3 className='header__title'>Login</h3>
                         </Link>
                     </div>
-                    <div className={`header__state ${activeLink === '/dashboard' && isDesktop ? 'header__active-nav-link' : ''}`}>
+                    <div className={`header__state ${activeLink === '/dashboard' ? 'header__active-nav-link' : ''}`}>
                         <Link to={`/dashboard`} onClick={() => updateActiveLink('/dashboard')}>
                             <h3 className='header__title'>User Account</h3>
                         </Link>

@@ -112,6 +112,7 @@ label {
     position: relative;
     bottom: -10px;
     width: 100%;
+    margin: 0;
 
     @include tablet {
         width: 14rem;
