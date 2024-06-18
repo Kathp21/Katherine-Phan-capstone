@@ -27,7 +27,6 @@ function DisplayData({ inputData, isFirstLoad }) {
           )
         })}
       </ul>
-      <p className="itinerary__text">Want to save your travel itinerary?</p>
       <RegisterSaveItinerary itineraryData={inputData}/>
     </section>
   )

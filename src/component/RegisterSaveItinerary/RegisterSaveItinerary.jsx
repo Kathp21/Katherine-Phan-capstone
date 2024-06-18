@@ -32,6 +32,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
     const [ errMsg, setErrMsg ] = useState('')
     // const [ success, setSuccess ] = useState(false)
     // const [ showSaveButton, setShowSaveButton ] = useState(false)
+    const [ isSave, setIsSave ] = useState(false)
 
     useEffect(() => {
         if (userRef.current) {
@@ -88,6 +89,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                     }
                 });
                 console.log('Itinerary saved successfully:', saveItineraryResponse.data);
+                setIsSave(true)
             } catch (error) {
                 console.error('Error saving itinerary:', error.response ? error.response.data : error.message);
             }
@@ -137,6 +139,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                 }
             })
             console.log('Itinerary saved successfully:', itineraries.data )
+            setIsSave(true)
         } catch (error) {
             console.error('Error saving itinerary:', error.response ? error.response.data : error.message);
         }
@@ -145,20 +148,22 @@ export default function RegisterSaveItinerary({ itineraryData }) {
     return (
         <> 
             {isLoggedIn ? (
-                <section>
-                    <h1>Save Your Itinerary</h1>
-                    <button onClick={handleSaveItineraryButton}>Save Itinerary</button>
+                <section className='save-itinerary__button'>
+                    <button onClick={handleSaveItineraryButton}>
+                        {isSave ? 'Saved' : 'Save'}
+                    </button>
                 </section>
             ) : (
                 <section className='register-save-itinerary'>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
+                    <p className="register-save-itinerary__text">Want to save your travel itinerary?</p>
                     <h1>Register</h1>
                     <form onSubmit={handleSignUpSubmit}>
 
                         <div className='register-save-itinerary__form-box'>
                             <label htmlFor='firtName'>First Name</label>
                             <input
-                                type='text'
+                                type='text1'
                                 value={signUpData.first_name}
                                 onChange={e => handleSignUpFormChange(e, 'first_name')}
                                 id='firstName' />
@@ -166,7 +171,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                         <div className='register-save-itinerary__form-box'>
                             <label htmlFor='lastName'>Last Name</label>
                             <input
-                                type='text'
+                                type='text1'
                                 value={signUpData.last_name}
                                 onChange={e => handleSignUpFormChange(e, 'last_name')}
                                 id='lastName' />
@@ -179,7 +184,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                                 <FontAwesomeIcon icon={faTimes} className={validEmail || !signUpData.email ? 'hide' : 'valid'}/>
                             </label>
                             <input
-                                type="text"
+                                type="text1"
                                 id="email"
                                 ref={userRef}
                                 autoComplete="off"
@@ -203,7 +208,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                                 <FontAwesomeIcon icon={faTimes} className={validPassword || !signUpData.password ? "hide" : "invalid"} />
                             </label>
                             <input
-                                type="password"
+                                type="password1"
                                 id="password"
                                 onChange={e => handleSignUpFormChange(e, 'password')}
                                 value={signUpData.password}
