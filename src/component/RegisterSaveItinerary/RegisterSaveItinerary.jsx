@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
 import './RegisterSaveItinerary.scss'
 import useAuth from '../contexts/AuthContext';
-// import userAxios from '../api/axios';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { faEyeSlash, faLock, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -162,19 +163,29 @@ export default function RegisterSaveItinerary({ itineraryData }) {
 
                         <div className='register-save-itinerary__form-box'>
                             <label htmlFor='firtName'>First Name</label>
-                            <input
-                                type='text1'
-                                value={signUpData.first_name}
-                                onChange={e => handleSignUpFormChange(e, 'first_name')}
-                                id='firstName' />
+                            <div className='register-save-itinerary__input-container'>
+                                <FontAwesomeIcon icon={faUser} className='register-save-itinerary__icon'/>
+                                <input
+                                    type='text'
+                                    value={signUpData.first_name}
+                                    onChange={e => handleSignUpFormChange(e, 'first_name')}
+                                    id='firstName' 
+                                    placeholder='Enter Your First Name'
+                                />
+                            </div>
                         </div>
                         <div className='register-save-itinerary__form-box'>
                             <label htmlFor='lastName'>Last Name</label>
-                            <input
-                                type='text1'
-                                value={signUpData.last_name}
-                                onChange={e => handleSignUpFormChange(e, 'last_name')}
-                                id='lastName' />
+                            <div className='register-save-itinerary__input-container'>
+                                <FontAwesomeIcon icon={faUser} className='register-save-itinerary__icon'/>
+                                <input
+                                    type='text'
+                                    value={signUpData.last_name}
+                                    onChange={e => handleSignUpFormChange(e, 'last_name')}
+                                    id='lastName' 
+                                    placeholder='Enter Your Last Name'
+                                />
+                            </div>
                         </div>
 
                         <div className='register-save-itinerary__form-box'>
@@ -183,19 +194,27 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                                 <FontAwesomeIcon icon={faCheck} className={validEmail ? 'valid' : "hide"}/>
                                 <FontAwesomeIcon icon={faTimes} className={validEmail || !signUpData.email ? 'hide' : 'valid'}/>
                             </label>
-                            <input
-                                type="text1"
-                                id="email"
-                                ref={userRef}
-                                autoComplete="off"
-                                onChange={e => handleSignUpFormChange(e, 'email')}
-                                value={signUpData.email}
-                                required
-                                aria-invalid={validEmail ? "false" : "true"}
-                                aria-describedby="uidnote"
-                                onFocus={() => setEmailFocus(true)}
-                                onBlur={() => setEmailFocus(false)}
-                            />
+                            <div className='register-save-itinerary__input-container'>
+                                <FontAwesomeIcon icon={faEnvelope} className='register-save-itinerary__icon'/>
+                                <input
+                                    type="text"
+                                    id="email"
+                                    ref={userRef}
+                                    autoComplete="off"
+                                    onChange={e => handleSignUpFormChange(e, 'email')}
+                                    value={signUpData.email}
+                                    required
+                                    aria-invalid={validEmail ? "false" : "true"}
+                                    aria-describedby="uidnote"
+                                    onFocus={() => setEmailFocus(true)}
+                                    onBlur={() => setEmailFocus(false)}
+                                    placeholder='Username@gmail.com'
+                                />
+                            {/* <label htmlFor='email' className='register-save-itinerary__email'>
+                                <FontAwesomeIcon icon={faCheck} className={validEmail ? 'valid' : "hide"}/>
+                                <FontAwesomeIcon icon={faTimes} className={validEmail || !signUpData.email ? 'hide' : 'valid'}/>
+                            </label> */}
+                            </div>
                             <p id='uidnote' className={emailFocus && signUpData.email && !validEmail ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
                             This not a valid email address.
@@ -207,17 +226,25 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                                 <FontAwesomeIcon icon={faCheck} className={validPassword ? "valid" : "hide"} />
                                 <FontAwesomeIcon icon={faTimes} className={validPassword || !signUpData.password ? "hide" : "invalid"} />
                             </label>
-                            <input
-                                type="password1"
-                                id="password"
-                                onChange={e => handleSignUpFormChange(e, 'password')}
-                                value={signUpData.password}
-                                required
-                                aria-invalid={validPassword ? "false" : "true"}
-                                aria-describedby="pwdnote"
-                                onFocus={() => setPasswordFocus(true)}
-                                onBlur={() => setPasswordFocus(false)}
-                            />
+                            <div className='register-save-itinerary__input-container'>
+                                <FontAwesomeIcon icon={faLock} className='register-save-itinerary__icon'/>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    onChange={e => handleSignUpFormChange(e, 'password')}
+                                    value={signUpData.password}
+                                    required
+                                    aria-invalid={validPassword ? "false" : "true"}
+                                    aria-describedby="pwdnote"
+                                    onFocus={() => setPasswordFocus(true)}
+                                    onBlur={() => setPasswordFocus(false)}
+                                    placeholder='•••••••••'
+                                />
+                            </div>
+                            {/* <label htmlFor="password">
+                                <FontAwesomeIcon icon={faCheck} className={validPassword ? "valid" : "hide"} />
+                                <FontAwesomeIcon icon={faTimes} className={validPassword || !signUpData.password ? "hide" : "invalid"} />
+                            </label> */}
                             <p id="pwdnote" className={passwordFocus && !validPassword ? "instructions" : "offscreen"}>
                                 <FontAwesomeIcon icon={faInfoCircle} />
                                 8 to 24 characters.<br />

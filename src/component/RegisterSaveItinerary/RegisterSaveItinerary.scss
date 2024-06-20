@@ -5,8 +5,8 @@ a, a:visited {
     color: #0b0a0a;
 }
 
-input[type="text1"],
-input[type="password1"],
+input[type="text"],
+input[type="password"],
 textarea {
   font-size: 22px;
   padding: 0.25rem;
@@ -78,6 +78,20 @@ label {
     }
 }
 
+.register-save-itinerary__input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .register-save-itinerary__icon {
+        position: absolute;
+        left: 10px;
+        top:11px;
+        color: #888;
+    }
+}
+
 .instructions {
     font-size: 0.75rem;
     border-radius: 0.5rem;
@@ -129,3 +143,5 @@ label {
     display: flex;
     justify-content: flex-end;
 }
+
+

@@ -18,7 +18,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchItineraryTitle = async (token) => {
             try {
-                const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user/itinerary-title`, {
+                const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/itinerary-title`, {
                     headers: {
                         Authorization: `Bearer ${token}` // Include JWT token in the request headers
                     }

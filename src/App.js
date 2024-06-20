@@ -13,6 +13,8 @@ import ItineraryDetails from './component/ItineraryDetails/ItineraryDetails.jsx'
 import AuthStatus from './component/AuthStatus/AuthStatus.js'
 import PrivateRoute from './component/PrivateRoute/PrivateRoute.js'
 import Register from './component/Register /Register.jsx'
+import ResetPassword from './component/ResetPassword/ResetPassword.jsx'
+import ForgotPassword from './component/ForgotPassword/ForgotPassword.jsx'
 
 function App() {
 
@@ -38,13 +40,15 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Layout/>
-        <Header/>
+        <Header inputData={input}/>
         <AuthStatus/>
         <Routes>
           <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>
           <Route path='/recommendations' element={<DisplayData inputData={input} isFirstLoad={isFirstLoad}/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<Register/>}/>
+          <Route path='/reset-password' element={<ResetPassword/>}/>
+          <Route path='/forgot-password' element={<ForgotPassword/>}/>
           <Route element={<PrivateRoute />}>
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/itinerary-details/:recommendation_id' element={<ItineraryDetails />} />

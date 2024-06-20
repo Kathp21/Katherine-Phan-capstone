@@ -112,7 +112,7 @@ export default function Login() {
                                 />
                             </div>
                         </div>
-                        <button tyep="submit" className='login__button'>Log In</button>
+                        <button type="submit" className='login__button'>Log In</button>
                     </form>
                 </section>
                 <div className="login__links">
