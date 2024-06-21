@@ -6,6 +6,7 @@ import useAuth from '../contexts/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons';
+import Button from '../Button/Button';
 
 export default function Login() {
 
@@ -50,19 +51,19 @@ export default function Login() {
         navigate('/dashboard')
         // login({email: loginData.email, password: loginData.password, accessToken})
          // Reset the loginData state to clear the form fields
-        setLoginData({ email: '', password: '' });
+        setLoginData({ email: '', password: '' })
         setErrMsg('')
         } catch(err) {
             if (!err?.response) {
-                setErrMsg('No Server Response');
+                setErrMsg('No Server Response')
             } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
+                setErrMsg('Missing Username or Password')
             } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
+                setErrMsg('Unauthorized')
             } else {
-                setErrMsg('Login Failed');
+                setErrMsg('Login Failed')
             }
-            errRef.current.focus();
+            errRef.current.focus()
         }
     }
 
@@ -73,7 +74,7 @@ export default function Login() {
     return (
         <main className='login'>
             <section className='login__container'>
-            {/* <Register /> */}
+
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                 <section>
                     <form onSubmit={handleLoginSubmit} className='login__form-container'>
@@ -112,7 +113,11 @@ export default function Login() {
                                 />
                             </div>
                         </div>
-                        <button type="submit" className='login__button'>Log In</button>
+                        <Button 
+                            type='submit' 
+                            buttonText="Log In"
+                            variant='button__login'
+                        />
                     </form>
                 </section>
                 <div className="login__links">

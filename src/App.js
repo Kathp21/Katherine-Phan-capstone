@@ -10,7 +10,7 @@ import Login from './component/Login/Login.jsx'
 import { AuthProvider } from './component/contexts/AuthContext.js'
 import Dashboard from './component/DashBoard/DashBoard.jsx'
 import ItineraryDetails from './component/ItineraryDetails/ItineraryDetails.jsx'
-import AuthStatus from './component/AuthStatus/AuthStatus.js'
+// import AuthStatus from './component/AuthStatus/AuthStatus.js'
 import PrivateRoute from './component/PrivateRoute/PrivateRoute.js'
 import Register from './component/Register /Register.jsx'
 import ResetPassword from './component/ResetPassword/ResetPassword.jsx'
@@ -41,7 +41,6 @@ function App() {
       <BrowserRouter>
         <Layout/>
         <Header inputData={input}/>
-        <AuthStatus/>
         <Routes>
           <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>
           <Route path='/recommendations' element={<DisplayData inputData={input} isFirstLoad={isFirstLoad}/>}/>

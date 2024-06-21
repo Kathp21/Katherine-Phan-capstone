@@ -11,8 +11,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            // padding-left: 2rem;
-            // padding-right: 1rem;
             padding: 0 2rem;
         }
     }
@@ -49,7 +47,6 @@
         @include tablet {
             padding-bottom: 0;
             flex: 0.5;
-            // gap: 2rem;
             gap: 1rem;
         }
     }
@@ -60,7 +57,6 @@
         align-items: center;
         justify-content: center;
         border-radius: $border-radius;
-        // width: 50%;
         border-radius: 1.25rem;
         margin-top: 10px;
 
@@ -89,14 +85,6 @@
         @include desktop {
             width: 100%;
         }
-    }
-
-    &__inactive-nav-link {
-        height: $btn-height;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50%;
     }
 
     &__title {
@@ -131,17 +119,5 @@
                 align-items: center;
             }
         }
-
-        // &__state {
-        //     margin: 0;
-
-        //     &__title {
-        //         font-size: 1.2rem;
-        //     }
-
-        //     &:last-child {
-        //         border-bottom: none;
-        //     }
-        // }
     }
 }

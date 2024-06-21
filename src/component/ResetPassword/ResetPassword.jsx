@@ -5,7 +5,7 @@ import './ResetPassword.scss'
 import Button from '../Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
-import { faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
@@ -110,7 +110,6 @@ const ResetPassword = () => {
                     />
                 </div>
                 <p id="pwdnote" className={!validPassword ? "visible" : "hidden"}>
-                {/* <p className='reset-pwd__text'> */}
                     8 to 24 characters.<br />
                     Must include uppercase and lowercase letters, a number and a special character.<br />
                     Allowed special characters: 

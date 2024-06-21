@@ -8,10 +8,14 @@ a, a:visited {
 input[type="text"],
 input[type="password"],
 textarea {
-  font-size: 22px;
-  padding: 0.25rem;
+  font-size: $mob-body;
+  padding: 10px 10px 10px 35px;
   border-radius: 0.5rem;
   border: 1px solid #ddd;
+
+  @include tablet {
+    font-size: $tab-body;
+  }
 }
 
 label {
@@ -45,31 +49,6 @@ label {
     padding-right: 2rem;
 }
 
-.register-save-itinerary__button {
-    margin-top: 1.5rem;
-}
-
-
-.register-save-itinerary__button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 20px;
-    background-color: #3b5998;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 7rem;
-
-    &:hover {
-        background-color: #333;
-    }
-}
-
 .register-save-itinerary__text {
     padding-left: 1.5rem;
 
@@ -84,12 +63,26 @@ label {
     align-items: center;
     flex-direction: column;
 
+    .register-save-itinerary__pwd-icon{
+        position: absolute;
+        left: 10px;
+        top: 14px;
+        color: #888;
+
+        &--eye {
+            right: 1rem;
+            left: auto;
+            cursor: pointer;
+        }
+    }
+
     .register-save-itinerary__icon {
         position: absolute;
         left: 10px;
         top:11px;
         color: #888;
     }
+
 }
 
 .instructions {
@@ -136,7 +129,6 @@ label {
 .line {
     display: inline-block;
     margin-left: 0.5rem;
-    // text-decoration: underline;
 }
 
 .save-itinerary__button {

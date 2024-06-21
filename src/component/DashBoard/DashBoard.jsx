@@ -3,17 +3,16 @@ import useAuth from "../contexts/AuthContext";
 import { useNavigate } from 'react-router-dom';
 import './DashBoard.scss';
 import axios from "axios";
-// import Card from "../Card/Card";
+import Button from "../Button/Button";
 
 const Dashboard = () => {
-    const [error, setError] = useState('');
-    const { logout, isLoggedIn } = useAuth();
-    const [userData, setUserData] = useState(null);
-    // const [ itineraries, setItineraries ] = useState(null)
+    const [error, setError] = useState('')
+    const [userData, setUserData] = useState(null)
     const [ titles, setTitles ] = useState(null)
-    
-    const navigate = useNavigate();
-    const { REACT_APP_API_BASE_PATH_USER } = process.env;
+
+    const { logout, isLoggedIn } = useAuth()
+    const navigate = useNavigate()
+    const { REACT_APP_API_BASE_PATH_USER } = process.env
 
     useEffect(() => {
         const fetchItineraryTitle = async (token) => {
@@ -38,11 +37,10 @@ const Dashboard = () => {
                         Authorization: `Bearer ${token}` // Include JWT token in the request headers
                     }
                 })
-                console.log('Token:', token);
-                console.log(response.data)
+
                 setUserData(response.data); // Set the fetched user data
-                // fetchItineraries(token)
                 fetchItineraryTitle(token)
+
             } catch (error) {
                 console.error('Error fetching user data:', error)
                 setError('Failed to fetch user data.')
@@ -73,34 +71,33 @@ const Dashboard = () => {
     };
 
     return (
-        <section>
-            <div className="dashboard-card">
-                <div className="card-body">
-                    {error && <div className="alert alert-danger">{error}</div>}
+        <section className="dashboard">
+            <div className="dashboard__card">
+                <div className="dashboard__card-body">
+                    {error && <div className="dashboard__alert dashboard__alert--danger">{error}</div>}
                     {userData && (
-                        <div>
-                            Welcome back <strong>{userData?.first_name}</strong>
+                        <div className="dashboard__username">
+                            Welcome back {userData?.first_name}!
                         </div>
                     )}
-                    {/* <a href="/update-profile" className="btn btn-primary w-100 mt-3">
-                        Update Profile
-                    </a> */}
+                    
                     {titles && titles.length > 0 && (
                         <div>
                             <h3>Your Itineraries:</h3>
-                            <ol type="1" className="itinerary-list">
+                            <ol type="1" className="dashboard__itinerary-list">
                                 {titles.map(title => (
-                                    <li className="itinerary-list__items" key={title.recommendation_id} onClick={() => handleTitleClick(title.recommendation_id)}>{title.title}</li>
+                                    <li className="dashboard__items" key={title.recommendation_id} onClick={() => handleTitleClick(title.recommendation_id)}>{title.title}</li>
                                 ))}
                             </ol>
                         </div>
                     )}
                 </div>
             </div>
-            <div className="w-100 text-center mt-2">
-                <button className="btn btn-link" onClick={handleLogout}>
+            <div className="dashboard__button-container">
+                <Button buttonText="Log Out" variant="button__log-out button__log-out--link" type='submit' onClick={handleLogout}/>
+                {/* <button className="btn btn-link" onClick={handleLogout}>
                     Log Out
-                </button>
+                </button> */}
             </div>
         </section>
     );

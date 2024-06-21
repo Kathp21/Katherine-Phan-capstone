@@ -1,7 +1,6 @@
 import Card from "../Card/Card"
 import './DisplayData.scss'
 import Loading from "../Loading/Loading"
-// import Login from '../Login/Login'
 import RegisterSaveItinerary from "../RegisterSaveItinerary/RegisterSaveItinerary"
 
 function DisplayData({ inputData, isFirstLoad }) {

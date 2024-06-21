@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
 import './Register.scss';
 import useAuth from '../contexts/AuthContext';
-// import userAxios from '../api/axios';
+import Button from '../Button/Button';
 import { faEnvelope, faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -33,8 +33,7 @@ export default function Register({ itineraryData }) {
     const [ passwordFocus, setPasswordFocus ] = useState(false)
 
     const [ errMsg, setErrMsg ] = useState('')
-    // const [ success, setSuccess ] = useState(false)
-    // const [ showSaveButton, setShowSaveButton ] = useState(false)
+    const [ showPassword, setShowPassword ] = useState('')
 
     useEffect(() => {
         if (userRef.current) {
@@ -105,7 +104,6 @@ export default function Register({ itineraryData }) {
         if (signInResponse.status === 201) {
             const userData = signInResponse.data.user
             localStorage.setItem('userData', JSON.stringify(userData))
-            // setShowSaveButton(true)
         } else {
             setErrMsg('Sign-in failed. Please check your credentials.');
             // Optionally, you can clear the form fields to allow the user to try again
@@ -116,8 +114,6 @@ export default function Register({ itineraryData }) {
                 password: ''
             })
         }
-
-        // setSuccess(true);
 
         } catch(err) {
             if (!err?.response) {
@@ -131,27 +127,15 @@ export default function Register({ itineraryData }) {
         }
     }
 
-    // const handleSaveItineraryButton = async () => {
-    //     const token = localStorage.getItem('authToken')
-    //     try{
-    //         const itineraries = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/save-itinerary`, itineraryData, {
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         })
-    //         console.log('Itinerary saved successfully:', itineraries.data )
-    //     } catch (error) {
-    //         console.error('Error saving itinerary:', error.response ? error.response.data : error.message);
-    //     }
-    // }
+    const togglePasswordVisibility = () => {
+        setShowPassword(prevState => !prevState)
+    }
 
     return (
         <> 
             {isLoggedIn ? (
                 <section>
                     <Link to='/'></Link>
-                    {/* <h1>Save Your Itinerary</h1>
-                    <button onClick={handleSaveItineraryButton}>Save Itinerary</button> */}
                 </section>
             ) : (
                 <section className='register'>
@@ -222,7 +206,7 @@ export default function Register({ itineraryData }) {
                                 <div className='register__input-container'>
                                     <FontAwesomeIcon icon={faLock} className="register__icon" />
                                     <input
-                                        type="password"
+                                        type={ showPassword ? "text" : "password"}
                                         id="password"
                                         onChange={e => handleSignUpFormChange(e, 'password')}
                                         value={signUpData.password}
@@ -232,6 +216,11 @@ export default function Register({ itineraryData }) {
                                         onFocus={() => setPasswordFocus(true)}
                                         onBlur={() => setPasswordFocus(false)}
                                         placeholder='Enter your password'
+                                    />
+                                    <FontAwesomeIcon
+                                        icon={showPassword ? faEyeSlash : faEye}
+                                        onClick={togglePasswordVisibility}
+                                        className='register__pwd-icon register__pwd-icon--eye'
                                     />
                                     <p id="pwdnote" className={passwordFocus && !validPassword ? "instructions" : "offscreen"}>
                                         <FontAwesomeIcon icon={faInfoCircle} />
@@ -244,7 +233,12 @@ export default function Register({ itineraryData }) {
                                     </p>
                                 </div>
                             </div>
-                            <button className="register__button" disabled={!validEmail || !validPassword ? true : false}>Sign Up</button>
+                            <Button 
+                                type='submit' 
+                                buttonText="Sign Up"
+                                variant='button__register'
+                                disabled={!validEmail || !validPassword ? true : false}
+                            />
                         </form>
                     </div>
                 </section>

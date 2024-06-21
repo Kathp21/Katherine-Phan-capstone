@@ -13,11 +13,11 @@ const ForgotPassword = () => {
 
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_BASE_PATH_USER}/forgot-password`, { email })
-            console.log("Response:", response.data)
             setMessage(response.data.message)
             setLinkSent(true)
+
         } catch (error) {
-            console.error('Error sending password reset email:', error.response?.data || error.message)
+            console.error('Error sending password reset email:', error.message)
             setMessage('Failed to send password reset email. Please try again.');
         }
     }

@@ -15,6 +15,7 @@ function Header({inputData}) {
 
     const updateActiveLink = (linkName) => {
         setActiveLink(linkName)
+        setMenuOpen(false)
     }
 
     const toggleMenu = () => {

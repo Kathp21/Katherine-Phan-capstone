@@ -20,16 +20,17 @@ const ItineraryDetails = () => {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
-                });
-                setItineraryDetails(response.data);
-            } catch (error) {
-                console.error('Error fetching itinerary details:', error);
-                setError('Failed to fetch itinerary details.');
-            }
-        };
+                })
+                setItineraryDetails(response.data)
 
-        fetchItineraryDetails();
-    }, [recommendation_id, REACT_APP_API_BASE_PATH_USER]);
+            } catch (error) {
+                console.error('Error fetching itinerary details:', error)
+                setError('Failed to fetch itinerary details.')
+            }
+        }
+
+        fetchItineraryDetails()
+    }, [recommendation_id, REACT_APP_API_BASE_PATH_USER])
 
     const handleBackButton = () => {
         navigate('/dashboard')

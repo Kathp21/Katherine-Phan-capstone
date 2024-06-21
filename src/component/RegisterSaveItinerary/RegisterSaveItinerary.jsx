@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
 import './RegisterSaveItinerary.scss'
 import useAuth from '../contexts/AuthContext';
+import Button from '../Button/Button';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash, faLock, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
@@ -31,8 +32,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
     const [ passwordFocus, setPasswordFocus ] = useState(false)
 
     const [ errMsg, setErrMsg ] = useState('')
-    // const [ success, setSuccess ] = useState(false)
-    // const [ showSaveButton, setShowSaveButton ] = useState(false)
+    const [ showPassword, setShowPassword ] = useState('')
     const [ isSave, setIsSave ] = useState(false)
 
     useEffect(() => {
@@ -117,8 +117,6 @@ export default function RegisterSaveItinerary({ itineraryData }) {
             })
         }
 
-        // setSuccess(true);
-
         } catch(err) {
             if (!err?.response) {
                 setErrMsg('No Server Response')
@@ -146,13 +144,20 @@ export default function RegisterSaveItinerary({ itineraryData }) {
         }
     }
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(prevState => !prevState)
+    }
+
     return (
         <> 
             {isLoggedIn ? (
                 <section className='save-itinerary__button'>
-                    <button onClick={handleSaveItineraryButton}>
-                        {isSave ? 'Saved' : 'Save'}
-                    </button>
+                    <Button 
+                        type='submit' 
+                        buttonText={isSave ? 'Saved' : 'Save'}
+                        variant='button__save-itinerary'
+                        onClick={handleSaveItineraryButton}
+                    />
                 </section>
             ) : (
                 <section className='register-save-itinerary'>
@@ -210,10 +215,6 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                                     onBlur={() => setEmailFocus(false)}
                                     placeholder='Username@gmail.com'
                                 />
-                            {/* <label htmlFor='email' className='register-save-itinerary__email'>
-                                <FontAwesomeIcon icon={faCheck} className={validEmail ? 'valid' : "hide"}/>
-                                <FontAwesomeIcon icon={faTimes} className={validEmail || !signUpData.email ? 'hide' : 'valid'}/>
-                            </label> */}
                             </div>
                             <p id='uidnote' className={emailFocus && signUpData.email && !validEmail ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
@@ -229,7 +230,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                             <div className='register-save-itinerary__input-container'>
                                 <FontAwesomeIcon icon={faLock} className='register-save-itinerary__icon'/>
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     id="password"
                                     onChange={e => handleSignUpFormChange(e, 'password')}
                                     value={signUpData.password}
@@ -240,11 +241,12 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                                     onBlur={() => setPasswordFocus(false)}
                                     placeholder='•••••••••'
                                 />
+                                <FontAwesomeIcon
+                                    icon={showPassword ? faEyeSlash : faEye} 
+                                    onClick={togglePasswordVisibility}
+                                    className='register-save-itinerary__pwd-icon register-save-itinerary__pwd-icon--eye'
+                                />
                             </div>
-                            {/* <label htmlFor="password">
-                                <FontAwesomeIcon icon={faCheck} className={validPassword ? "valid" : "hide"} />
-                                <FontAwesomeIcon icon={faTimes} className={validPassword || !signUpData.password ? "hide" : "invalid"} />
-                            </label> */}
                             <p id="pwdnote" className={passwordFocus && !validPassword ? "instructions" : "offscreen"}>
                                 <FontAwesomeIcon icon={faInfoCircle} />
                                 8 to 24 characters.<br />
@@ -253,15 +255,18 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                             </p>
                         </div>
                         <div className="register-save-itinerary__button-container">
-                            <button className="register-save-itinerary__button" disabled={!validEmail || !validPassword ? true : false}>Sign Up</button>
+                            <Button 
+                                type='submit' 
+                                buttonText="Sign Up"
+                                variant='button__register-itinerary'
+                                disabled={!validEmail || !validPassword ? true : false}
+                            />
                         </div>
                     </form>
                     <p>
                         Already registered?
                         <span className="line">
-                            {/*put router link here*/}
                             <Link to='/Login'>Sign In</Link>
-                            {/* <a href="#">Sign In</a> */}
                         </span>
                     </p>
                 </section>
