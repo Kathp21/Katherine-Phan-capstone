@@ -38,7 +38,7 @@ const ItineraryDetails = () => {
 
     return (
         <main>
-            <h2>Itinerary Details</h2>
+            <h2 className="itinerary-details__headline">Itinerary Details</h2>
             <section className="itinerary-details">
                 <div className="itinerary-details__container">
                     <h4 className="itinerary-details__row-heading">Day</h4>
@@ -49,7 +49,7 @@ const ItineraryDetails = () => {
                 <div>
                     {error && <div className="alert alert-danger">{error}</div>}
                     {itineraryDetails.map(day => (
-                        <Card key={day.recommendation_id} day={day} />
+                        <Card key={day.itinerary_id} day={day} />
                     ))}  
                 </div>
                 <div className="itinerary-details__button">

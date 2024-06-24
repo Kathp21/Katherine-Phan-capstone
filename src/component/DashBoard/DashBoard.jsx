@@ -84,20 +84,24 @@ const Dashboard = () => {
                     {titles && titles.length > 0 && (
                         <div>
                             <h3>Your Itineraries:</h3>
+                            <div>
                             <ol type="1" className="dashboard__itinerary-list">
                                 {titles.map(title => (
                                     <li className="dashboard__items" key={title.recommendation_id} onClick={() => handleTitleClick(title.recommendation_id)}>{title.title}</li>
                                 ))}
                             </ol>
+                            </div>
                         </div>
                     )}
                 </div>
             </div>
             <div className="dashboard__button-container">
-                <Button buttonText="Log Out" variant="button__log-out button__log-out--link" type='submit' onClick={handleLogout}/>
-                {/* <button className="btn btn-link" onClick={handleLogout}>
-                    Log Out
-                </button> */}
+                <Button
+                    buttonText="Log Out" 
+                    variant="button__log-out button__log-out--link" 
+                    type='submit' 
+                    onClick={handleLogout}
+                />
             </div>
         </section>
     );

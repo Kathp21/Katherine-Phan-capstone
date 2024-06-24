@@ -10,7 +10,6 @@ import Login from './component/Login/Login.jsx'
 import { AuthProvider } from './component/contexts/AuthContext.js'
 import Dashboard from './component/DashBoard/DashBoard.jsx'
 import ItineraryDetails from './component/ItineraryDetails/ItineraryDetails.jsx'
-// import AuthStatus from './component/AuthStatus/AuthStatus.js'
 import PrivateRoute from './component/PrivateRoute/PrivateRoute.js'
 import Register from './component/Register /Register.jsx'
 import ResetPassword from './component/ResetPassword/ResetPassword.jsx'
@@ -21,7 +20,7 @@ function App() {
   const { REACT_APP_API_BASE_PATH } = process.env
   const [ input, setInput ] = useState()
   const [ isFirstLoad, setIsFirstLoad ] = useState(true)
-  // const { isLoggedIn, logout } = useAuth()
+
   
   const addUserInput = async (userInput) => {
     setIsFirstLoad(false)

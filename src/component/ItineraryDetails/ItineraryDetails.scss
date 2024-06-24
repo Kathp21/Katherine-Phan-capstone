@@ -11,6 +11,13 @@
         padding: 2rem 10rem;
     }
 
+    &__headline {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0;
+        margin-top: 1.5rem;
+    }
+
     &__container {
         display: none;
 
