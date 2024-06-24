@@ -14,6 +14,7 @@ import PrivateRoute from './component/PrivateRoute/PrivateRoute.js'
 import Register from './component/Register /Register.jsx'
 import ResetPassword from './component/ResetPassword/ResetPassword.jsx'
 import ForgotPassword from './component/ForgotPassword/ForgotPassword.jsx'
+import AboutUs from './component/AboutUs/AboutUs.jsx'
 
 function App() {
 
@@ -41,7 +42,8 @@ function App() {
         <Layout/>
         <Header inputData={input}/>
         <Routes>
-          <Route path='/' element={<UserInput onAddUserInput={addUserInput}/>}/>
+          <Route path ='/' element={<AboutUs/>}/>
+          <Route path='/user-input' element={<UserInput onAddUserInput={addUserInput}/>}/>
           <Route path='/recommendations' element={<DisplayData inputData={input} isFirstLoad={isFirstLoad}/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<Register/>}/>

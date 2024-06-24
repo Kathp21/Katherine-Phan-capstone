@@ -6,7 +6,7 @@ const Layout = () => {
   const location = useLocation()
 
   useEffect(() => {
-    if (location.pathname === '/recommendations' || location.pathname.startsWith('/itinerary-details')) {
+    if (location.pathname === '/recommendations' || location.pathname === '/' || location.pathname.startsWith('/itinerary-details')) {
       document.body.style.backgroundImage = 'none'
       document.body.style.backgroundColor = '#cde7f9'
     } else {

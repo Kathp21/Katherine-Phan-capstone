@@ -35,6 +35,31 @@ button {
       }
 }
 
+.button__get-start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem;
+    border: none;
+    border-radius: $btn-border-radius;
+    color:$white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 7rem;
+    margin-top: 1.5rem;
+
+    &:hover {
+        background-color: $graphite;
+    }
+
+    @include tablet {
+        margin-left: 10px;
+        width: 10rem;
+    }
+}
+
 .button__password {
     width: 100%;
     padding: 10px;

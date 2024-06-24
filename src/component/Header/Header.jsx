@@ -41,7 +41,7 @@ function Header({inputData}) {
                     />
                 </nav>
                 <section className={`header__nav-link ${menuOpen ? 'header__nav-link--open' : ''}`}>
-                    <div className={`header__state ${activeLink === '/' ? 'header__active-nav-link' : ''}`}>
+                    <div className={`header__state ${activeLink === '/user-input' ? 'header__active-nav-link' : ''}`}>
                         <Link to={`/`} onClick={() => updateActiveLink('/')}>
                             <h3 className='header__title'>User Input</h3>
                         </Link>
