@@ -1,0 +1,150 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+a, a:visited {
+    color: #0b0a0a;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  border-radius: 0.5rem;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+
+  &:focus {
+      outline: none;
+      border-color: #888;
+  }
+}
+
+.register {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+
+    &__container {
+        background: #f1f7fe;
+        padding: 2rem;
+        border-radius: 30px;
+        box-shadow: 0 0 2em #e6e9f9;
+    }
+
+    &__form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+}
+
+.register__input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .register__pwd-icon{
+        position: absolute;
+        left: 10px;
+        top: 14px;
+        color: #888;
+
+        &--eye {
+            right: 0.5rem;
+            left: auto;
+            cursor: pointer;
+        }
+    }
+
+    .register__icon {
+        position: absolute;
+        left: 10px;
+        top:11px;
+        color: #888;
+    }
+}
+
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+
+
+.register__form-box {
+    background: $white;
+    box-shadow: 0 0 2em #e6e9f9;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    border-radius: 20px;
+    color: #4d4d4d;
+    margin-bottom: 1rem;
+    text-align: left;
+
+    @include tablet {
+        padding: 1.5rem;
+    }
+}
+
+.register__email {
+    padding-right: 1.7rem;
+}
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+    width: 100%;
+    margin: 0;
+
+    @include tablet {
+        width: 14rem;
+    }
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
+    margin-left: 0.5rem;
+    // text-decoration: underline;
+}

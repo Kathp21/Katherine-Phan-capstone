@@ -1,0 +1,101 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.login {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+
+    &__container {
+        background: #f1f7fe;
+        padding: 2rem;
+        border-radius: 30px;
+        box-shadow: 0 0 2em #e6e9f9;
+    }
+    
+    &__form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__info {
+        background: $white;
+        box-shadow: 0 0 2em #e6e9f9;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        border-radius: 20px;
+        color: #4d4d4d;
+        margin-bottom: 1rem;
+        text-align: left;
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .login__input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .login__icon {
+                position: absolute;
+                left: 10px;
+                color: #888;
+            }
+        
+            input {
+                width: 100%;
+                padding: 10px 10px 10px 35px;
+                border-radius: 8px;
+                border: 1px solid #ddd;
+                font-size: 1rem;
+
+                &:focus {
+                    outline: none;
+                    border-color: #888;
+                }
+            }
+
+            .login__icon--eye {
+                right: 10px;
+                left: auto;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__links {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+
+        .login__link {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .errmsg {
+        background-color: #ffdddd;
+        color: #d8000c;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+    }
+
+    .offscreen {
+        position: absolute;
+        left: -9999px;
+    }
+}

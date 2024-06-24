@@ -1,6 +1,7 @@
 import Card from "../Card/Card"
 import './DisplayData.scss'
 import Loading from "../Loading/Loading"
+import RegisterSaveItinerary from "../RegisterSaveItinerary/RegisterSaveItinerary"
 
 function DisplayData({ inputData, isFirstLoad }) {
   if (!inputData && isFirstLoad) return <Loading text="PLEASE SUBMIT INFO"/>
@@ -19,12 +20,13 @@ function DisplayData({ inputData, isFirstLoad }) {
         {inputData.itinerary.map((item) => {
           return (
             <Card
-              key={item.id}
+              key={item.day_string}
               day={item}
             /> 
           )
         })}
       </ul>
+      <RegisterSaveItinerary itineraryData={inputData}/>
     </section>
   )
 }

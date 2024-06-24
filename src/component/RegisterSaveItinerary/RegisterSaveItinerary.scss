@@ -1,0 +1,139 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+a, a:visited {
+    color: #0b0a0a;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  font-size: $mob-body;
+  padding: 10px 10px 10px 35px;
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+
+  @include tablet {
+    font-size: $tab-body;
+  }
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+.register-save-itinerary{
+    padding: 0 1.5rem;
+
+    @include tablet {
+        padding: 0;
+    }
+
+    &__form-box {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: baseline;
+        margin-bottom: 8px;
+
+        @include tablet {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+}
+
+.register-save-itinerary__email{
+    padding-right: 2rem;
+}
+
+.register-save-itinerary__text {
+    padding-left: 1.5rem;
+
+    @include tablet {
+        padding-left: 0;
+    }
+}
+
+.register-save-itinerary__input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .register-save-itinerary__pwd-icon{
+        position: absolute;
+        left: 10px;
+        top: 14px;
+        color: #888;
+
+        &--eye {
+            right: 1rem;
+            left: auto;
+            cursor: pointer;
+        }
+    }
+
+    .register-save-itinerary__icon {
+        position: absolute;
+        left: 10px;
+        top:11px;
+        color: #888;
+    }
+
+}
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
+    margin-left: 0.5rem;
+}
+
+.save-itinerary__button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+

@@ -1,7 +1,7 @@
 @use '../../styles/partials/mixins' as *;
 @use '../../styles/partials/variables' as *;
 
-.itinerary {
+.itinerary-details {
 
     @include tablet {
         padding: 2rem;
@@ -9,6 +9,13 @@
 
     @include desktop {
         padding: 2rem 10rem;
+    }
+
+    &__headline {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0;
+        margin-top: 1.5rem;
     }
 
     &__container {
@@ -32,5 +39,11 @@
 
     &__row-heading {
         font-size: 1.125rem;
+    }
+
+    &__button {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
     }
 }

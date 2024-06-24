@@ -1,0 +1,55 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+
+.dashboard{
+
+  &__card {
+    // border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  &__card-body {
+    padding: 20px;
+  }
+
+  &__alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    &---danger {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+  }
+
+  &__username {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  &__itinerary-list {
+    padding: 1rem;
+    margin: 0;
+  
+  }
+  
+  &__items {
+    padding: 0.5rem;
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: center;
+  
+    @include tablet {
+      justify-content: end;
+    }
+  }
+}
+  
+  

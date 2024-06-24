@@ -1,5 +1,4 @@
 import './Slider.scss'
-import { useState } from "react";
 
 const Slider = ({value, onChange}) => {
 
