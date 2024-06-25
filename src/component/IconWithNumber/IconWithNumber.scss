@@ -1,0 +1,25 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.icon-with-number {
+    position: relative;
+    display: inline-block;
+    font-size: 24px;
+    margin-right: 8px; 
+
+    &__icon {
+        color: #E64A19; 
+        font-size: 30px;
+    }
+
+    &__number {
+        position: absolute;
+        top: 42%;
+        left: 36%;
+        transform: translate(-50%, -50%);
+        color: $white; 
+        font-size: 0.8rem;
+        font-weight: bold; 
+    }
+}
+

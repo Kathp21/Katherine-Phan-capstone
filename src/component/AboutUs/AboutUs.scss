@@ -71,11 +71,11 @@
         height: 10rem;
 
         @include tablet {
-            height: 45vh;
+            height: 20rem;
         }
 
         @include desktop {
-            height: 60vh;
+            height: 28rem;
         }
     }
 }

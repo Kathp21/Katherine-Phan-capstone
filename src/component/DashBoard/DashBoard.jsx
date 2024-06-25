@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import './DashBoard.scss';
 import axios from "axios";
 import Button from "../Button/Button";
+import IconWithNumber from "../IconWithNumber/IconWithNumber";
+
 
 const Dashboard = () => {
     const [error, setError] = useState('')
@@ -84,12 +86,19 @@ const Dashboard = () => {
                     {titles && titles.length > 0 && (
                         <div>
                             <h3>Your Itineraries:</h3>
-                            <div>
-                            <ol type="1" className="dashboard__itinerary-list">
-                                {titles.map(title => (
-                                    <li className="dashboard__items" key={title.recommendation_id} onClick={() => handleTitleClick(title.recommendation_id)}>{title.title}</li>
-                                ))}
-                            </ol>
+                            <div className="dashboard__list-container">
+                                <ol type="1" className="dashboard__itinerary-list">
+                                    {titles.map((title, index) => (
+                                        <li className="dashboard__items" 
+                                            key={title.recommendation_id} 
+                                            onClick={() => handleTitleClick(title.recommendation_id)}>
+                                            <IconWithNumber number={index + 1}/>
+                                            <div className="dashboard__item-content">
+                                                <strong>{title.title}</strong>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ol>
                             </div>
                         </div>
                     )}

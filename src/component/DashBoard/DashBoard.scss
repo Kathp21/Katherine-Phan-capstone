@@ -5,7 +5,6 @@
 .dashboard{
 
   &__card {
-    // border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 20px;
   }
@@ -40,6 +39,21 @@
   
   &__items {
     padding: 0.5rem;
+    margin-left: 10px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    background: #ffffff; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    padding: 15px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  &__items svg {
+    margin-right: 8px;
   }
 
   &__button-container {
@@ -50,6 +64,18 @@
       justify-content: end;
     }
   }
+
+  // &__list-container {
+  //   background-color:#e6e9f9;
+  //   border-radius: $btn-border-radius;
+  // }
+
+  &____item-content {
+    margin-left: 10px;
+  }
+  
+  &__item-content strong {
+    display: block;
+    font-size: 1.2rem;
+  }
 }
-  
-  
