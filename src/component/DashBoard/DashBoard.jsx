@@ -58,7 +58,7 @@ const Dashboard = () => {
     }, [isLoggedIn, navigate, REACT_APP_API_BASE_PATH_USER]); 
     
     const handleTitleClick = (recommendation_id) => {
-        navigate(`/itinerary-details/${recommendation_id}`);
+        navigate(`/${recommendation_id}`);
     }
 
     const handleLogout = async () => {

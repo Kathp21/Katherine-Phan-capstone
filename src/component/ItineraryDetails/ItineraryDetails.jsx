@@ -16,7 +16,7 @@ const ItineraryDetails = () => {
         const fetchItineraryDetails = async () => {
             try {
                 const token = localStorage.getItem('authToken');
-                const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/itinerary-details/${recommendation_id}`, {
+                const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/${recommendation_id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

@@ -51,7 +51,7 @@ function App() {
           <Route path='/forgot-password' element={<ForgotPassword/>}/>
           <Route element={<PrivateRoute />}>
             <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/itinerary-details/:recommendation_id' element={<ItineraryDetails />} />
+            <Route path='/:recommendation_id' element={<ItineraryDetails />} />
           </Route>
         </Routes>
       </BrowserRouter>

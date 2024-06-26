@@ -6,9 +6,14 @@ const Layout = () => {
   const location = useLocation()
 
   useEffect(() => {
-    if (location.pathname === '/recommendations' || location.pathname === '/' || location.pathname === '/dashboard' || location.pathname.startsWith('/itinerary-details')) {
+    if (
+      location.pathname === '/recommendations' || 
+      location.pathname === '/' || location.pathname === '/dashboard' || 
+      location.pathname.match(/^\/[^/]+$/)) {
+      
       document.body.style.backgroundImage = 'none'
       document.body.style.backgroundColor = '#cde7f9'
+    
     } else {
       document.body.style.backgroundImage = `url(${backgroundImage})`
       document.body.style.backgroundColor = 'transparent'
