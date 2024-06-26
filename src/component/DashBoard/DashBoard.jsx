@@ -5,12 +5,16 @@ import './DashBoard.scss';
 import axios from "axios";
 import Button from "../Button/Button";
 import IconWithNumber from "../IconWithNumber/IconWithNumber";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 
 const Dashboard = () => {
     const [error, setError] = useState('')
     const [userData, setUserData] = useState(null)
     const [ titles, setTitles ] = useState(null)
+    const [ showCheckboxes, setShowCheckboxes ] = useState(false)
+    const [ selectedItineraries, setSelectedItineraries ] = useState([])
 
     const { logout, isLoggedIn } = useAuth()
     const navigate = useNavigate()
@@ -61,6 +65,54 @@ const Dashboard = () => {
         navigate(`/${recommendation_id}`);
     }
 
+    const handleTrashCanClick = async () => {
+        if(showCheckboxes) {
+            //If checkboxes are shown, delete selected itineraries
+            await handleDelete()
+        } else {
+            //Otherwise, show checkboxes
+            setShowCheckboxes(true)
+        }
+    }
+
+    const handleCheckboxChange = ( recommendation_id) => {
+        setSelectedItineraries(prevSelected => {
+            if (prevSelected.includes(recommendation_id)) {
+                return prevSelected.filter(id => id !== recommendation_id)
+            } else {
+                return [...prevSelected, recommendation_id]
+            }
+        })
+    }
+
+    const handleDelete = async () => {
+        try {
+            const token = localStorage.getItem('authToken')
+            
+            //Iterate over selectedItineraies and send a delete request for each 
+            const deleteRequests = selectedItineraries.map(recommendation_id =>
+                axios.delete(`${REACT_APP_API_BASE_PATH_USER}/${recommendation_id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}` // Include JWT token in the request headers
+                    }
+                })
+            )
+
+            //Wait for all delete requests to complete 
+            await Promise.all(deleteRequests)
+            
+            //Remove the deleted itineraries from the state 
+            setTitles(prevTitles =>  prevTitles.filter(title => 
+                !selectedItineraries.includes(title.recommendation_id)))
+
+            //Clear the selected items
+            setSelectedItineraries([])
+        } catch (error) {
+            console.error('Error deleting itineraries:', error)
+            setError('Failed to delete itineraries.')
+        }
+    }
+
     const handleLogout = async () => {
         setError('')
 
@@ -70,7 +122,7 @@ const Dashboard = () => {
         } catch {
             setError('Failed to log out');
         }
-    };
+    }
 
     return (
         <section className="dashboard">
@@ -85,15 +137,26 @@ const Dashboard = () => {
                     
                     {titles && titles.length > 0 && (
                         <div>
-                            <h3>Your Itineraries:</h3>
+                            <div>
+                                <h3>Your Itineraries:</h3>
+                                <FontAwesomeIcon icon={faTrashCan} onClick={handleTrashCanClick}/>
+                            </div>
                             <div className="dashboard__list-container">
                                 <ol type="1" className="dashboard__itinerary-list">
                                     {titles.map((title, index) => (
                                         <li className="dashboard__items" 
-                                            key={title.recommendation_id} 
-                                            onClick={() => handleTitleClick(title.recommendation_id)}>
+                                            key={title.recommendation_id}>
+
+                                            {showCheckboxes && (
+                                                <input
+                                                    type="checkbox"
+                                                    className="dashboard__checkbox"
+                                                    onChange={() => handleCheckboxChange(title.recommendation_id)}
+                                                    checked={selectedItineraries.includes(title.recommendation_id)}
+                                                    />
+                                                )}
                                             <IconWithNumber number={index + 1}/>
-                                            <div className="dashboard__item-content">
+                                            <div className="dashboard__item-content" onClick={() => handleTitleClick(title.recommendation_id)}>
                                                 <strong>{title.title}</strong>
                                             </div>
                                         </li>
