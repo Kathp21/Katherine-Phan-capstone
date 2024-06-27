@@ -137,7 +137,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
                     Authorization: `Bearer ${token}`
                 }
             })
-            console.log('Itinerary saved successfully:', itineraries.data )
+            console.log('Itinerary saved successfully:', itineraries.data ) 
             setIsSave(true)
         } catch (error) {
             console.error('Error saving itinerary:', error.response ? error.response.data : error.message);

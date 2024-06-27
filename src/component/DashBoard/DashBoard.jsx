@@ -32,7 +32,7 @@ const Dashboard = () => {
                 setTitles(response.data)
             } catch (error) {
                 console.error('Error fetching titles:', error)
-                setError('Failed to fetch titles.')
+                // setError('Failed to fetch titles.')
             }
         }
 
@@ -69,6 +69,9 @@ const Dashboard = () => {
         if(showCheckboxes) {
             //If checkboxes are shown, delete selected itineraries
             await handleDelete()
+
+            // Hide checkboxes after deletion
+            setShowCheckboxes(false);
         } else {
             //Otherwise, show checkboxes
             setShowCheckboxes(true)
@@ -135,9 +138,9 @@ const Dashboard = () => {
                         </div>
                     )}
                     
-                    {titles && titles.length > 0 && (
+                    {titles && titles.length > 0 ? (
                         <div>
-                            <div>
+                            <div className="dashboard__header-container">
                                 <h3>Your Itineraries:</h3>
                                 <FontAwesomeIcon icon={faTrashCan} onClick={handleTrashCanClick}/>
                             </div>
@@ -163,6 +166,11 @@ const Dashboard = () => {
                                     ))}
                                 </ol>
                             </div>
+                        </div>
+                    ) : (
+                        <div>
+                            <h3>Your Itineraries:</h3>
+                            <p>No itineraries saved in your account.</p>
                         </div>
                     )}
                 </div>
