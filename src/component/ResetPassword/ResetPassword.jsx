@@ -57,7 +57,7 @@ const ResetPassword = () => {
         }
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_BASE_PATH_USER}/reset-password`, { token, password })
+            const response = await axios.post(`${process.env.REACT_APP_API_BASE_PATH}/api/password/reset-password`, { token, password })
             setMessage(response.data.message)
             setTimeout(() => {
                 navigate('/login')
@@ -110,6 +110,7 @@ const ResetPassword = () => {
                     />
                 </div>
                 <p id="pwdnote" className={!validPassword ? "visible" : "hidden"}>
+                {/* <p className='reset-pwd__text'> */}
                     8 to 24 characters.<br />
                     Must include uppercase and lowercase letters, a number and a special character.<br />
                     Allowed special characters: 
@@ -125,6 +126,7 @@ const ResetPassword = () => {
                 {!passwordMatch && (
                     <p className="reset-pwd__error-message">Passwords do not match</p>
                 )}
+
             </form>
         </div>
     )

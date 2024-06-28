@@ -18,12 +18,12 @@ const Dashboard = () => {
 
     const { logout, isLoggedIn } = useAuth()
     const navigate = useNavigate()
-    const { REACT_APP_API_BASE_PATH_USER } = process.env
+    const { REACT_APP_API_BASE_PATH } = process.env
 
     useEffect(() => {
         const fetchItineraryTitle = async (token) => {
             try {
-                const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/itinerary-title`, {
+                const response = await axios.get(`${REACT_APP_API_BASE_PATH}/api/users/itinerary-title`, {
                     headers: {
                         Authorization: `Bearer ${token}` // Include JWT token in the request headers
                     }
@@ -38,7 +38,7 @@ const Dashboard = () => {
 
         const fetchUserData = async (token) => {
             try {
-                const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/current-user`, {
+                const response = await axios.get(`${REACT_APP_API_BASE_PATH}/api/users/current-user`, {
                     headers: {
                         Authorization: `Bearer ${token}` // Include JWT token in the request headers
                     }
@@ -59,7 +59,7 @@ const Dashboard = () => {
             const token = localStorage.getItem('authToken'); // Retrieve token from localStorage
             fetchUserData(token)
         }
-    }, [isLoggedIn, navigate, REACT_APP_API_BASE_PATH_USER]); 
+    }, [isLoggedIn, navigate, REACT_APP_API_BASE_PATH]); 
     
     const handleTitleClick = (recommendation_id) => {
         navigate(`/${recommendation_id}`);
@@ -94,7 +94,7 @@ const Dashboard = () => {
             
             //Iterate over selectedItineraies and send a delete request for each 
             const deleteRequests = selectedItineraries.map(recommendation_id =>
-                axios.delete(`${REACT_APP_API_BASE_PATH_USER}/${recommendation_id}`, {
+                axios.delete(`${REACT_APP_API_BASE_PATH}/api/itineraries/${recommendation_id}`, {
                     headers: {
                         Authorization: `Bearer ${token}` // Include JWT token in the request headers
                     }

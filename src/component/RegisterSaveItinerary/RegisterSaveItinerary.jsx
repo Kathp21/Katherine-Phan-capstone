@@ -17,7 +17,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
     const errRef = useRef(null)
     const { isLoggedIn, login} = useAuth()
 
-    const { REACT_APP_API_BASE_PATH_USER } = process.env
+    const { REACT_APP_API_BASE_PATH } = process.env
     const [ signUpData, setSignUpData ] = useState({
         first_name: '',
         last_name: '',
@@ -68,7 +68,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
         }
         // ADD USER TO DATABASE
         try{ 
-            const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/register`, signUpData)
+            const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH}/api/users/register`, signUpData)
             console.log(signUpData)
             console.log(signUpRes)
 
@@ -84,7 +84,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
 
         if (itineraryData) {
             try {
-                const saveItineraryResponse = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/save-itinerary`, itineraryData, {
+                const saveItineraryResponse = await axios.post(`${REACT_APP_API_BASE_PATH}/api/users/save-itinerary`, itineraryData, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -97,7 +97,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
         }
 
         //Sign in the user after successful registration
-        const signInResponse = await axios.post ( `${REACT_APP_API_BASE_PATH_USER}/login`, {
+        const signInResponse = await axios.post ( `${REACT_APP_API_BASE_PATH}/api/users/login`, {
             email: signUpData.email,
             password: signUpData.password
         })
@@ -132,7 +132,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
     const handleSaveItineraryButton = async () => {
         const token = localStorage.getItem('authToken')
         try{
-            const itineraries = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/save-itinerary`, itineraryData, {
+            const itineraries = await axios.post(`${REACT_APP_API_BASE_PATH}/api/itineraries/save-itinerary`, itineraryData, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

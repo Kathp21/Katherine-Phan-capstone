@@ -25,7 +25,7 @@ function App() {
   
   const addUserInput = async (userInput) => {
     setIsFirstLoad(false)
-    const url = `${REACT_APP_API_BASE_PATH}/api/chat-completion`
+    const url = `${REACT_APP_API_BASE_PATH}/api/recommendations`
     try {
       setInput(null)
       let newInput = await axios.post(url, userInput)

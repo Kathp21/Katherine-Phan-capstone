@@ -10,7 +10,7 @@ import Button from '../Button/Button';
 
 export default function Login() {
 
-    const { REACT_APP_API_BASE_PATH_USER } = process.env
+    const { REACT_APP_API_BASE_PATH } = process.env
 
     const [ loginData, setLoginData ] = useState({ email: '', password: ''})
 
@@ -40,7 +40,7 @@ export default function Login() {
         
         try {
         // STEP 1: GET JWT FROM SERVER
-        const loginRes = await axios.post(`${REACT_APP_API_BASE_PATH_USER}/login`, loginData)
+        const loginRes = await axios.post(`${REACT_APP_API_BASE_PATH}/api/users/login`, loginData)
         const accessToken = loginRes.data.token
 
          // Update user state in AuthContext

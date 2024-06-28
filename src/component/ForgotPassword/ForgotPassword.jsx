@@ -12,7 +12,7 @@ const ForgotPassword = () => {
         e.preventDefault()
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_BASE_PATH_USER}/forgot-password`, { email })
+            const response = await axios.post(`${process.env.REACT_APP_API_BASE_PATH}/api/password/forgot-password`, { email })
             setMessage(response.data.message)
             setLinkSent(true)
 

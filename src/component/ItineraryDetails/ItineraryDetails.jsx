@@ -8,7 +8,7 @@ const ItineraryDetails = () => {
     const { recommendation_id } = useParams();
     const [itineraryDetails, setItineraryDetails] = useState([]);
     const [error, setError] = useState('');
-    const { REACT_APP_API_BASE_PATH_USER } = process.env;
+    const { REACT_APP_API_BASE_PATH } = process.env;
 
     const navigate = useNavigate()
 
@@ -16,7 +16,7 @@ const ItineraryDetails = () => {
         const fetchItineraryDetails = async () => {
             try {
                 const token = localStorage.getItem('authToken');
-                const response = await axios.get(`${REACT_APP_API_BASE_PATH_USER}/${recommendation_id}`, {
+                const response = await axios.get(`${REACT_APP_API_BASE_PATH}/api/itineraries/${recommendation_id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -30,7 +30,7 @@ const ItineraryDetails = () => {
         }
 
         fetchItineraryDetails()
-    }, [recommendation_id, REACT_APP_API_BASE_PATH_USER])
+    }, [recommendation_id, REACT_APP_API_BASE_PATH])
 
     const handleBackButton = () => {
         navigate('/dashboard')
