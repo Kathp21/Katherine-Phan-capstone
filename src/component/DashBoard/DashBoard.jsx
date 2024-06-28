@@ -32,7 +32,7 @@ const Dashboard = () => {
                 setTitles(response.data)
             } catch (error) {
                 console.error('Error fetching titles:', error)
-                // setError('Failed to fetch titles.')
+
             }
         }
 
