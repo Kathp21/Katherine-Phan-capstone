@@ -42,7 +42,8 @@ export default function Login() {
         // STEP 1: GET JWT FROM SERVER
         const loginRes = await axios.post(`${REACT_APP_API_BASE_PATH}/api/users/login`, loginData)
         const accessToken = loginRes.data.token
-
+        
+        console.log(loginRes.data.token)
          // Update user state in AuthContext
         await login();
 
