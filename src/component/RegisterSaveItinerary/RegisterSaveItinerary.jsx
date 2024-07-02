@@ -84,7 +84,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
 
         if (itineraryData) {
             try {
-                const saveItineraryResponse = await axios.post(`${REACT_APP_API_BASE_PATH}/api/users/save-itinerary`, itineraryData, {
+                const saveItineraryResponse = await axios.post(`${REACT_APP_API_BASE_PATH}/api/itineraries/save-itinerary`, itineraryData, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
