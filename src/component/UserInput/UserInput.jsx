@@ -22,7 +22,7 @@ function UserInput(props) {
         }
     }
 
-    const interests = ['Cusine', 'Adventures', 'Nature', 'culture']
+    const interests = ['Cusine', 'Adventures', 'Nature', 'Culture']
 
     const handleInterestClick = (interest) => {
         if (selectedInterests.includes(interest)) {

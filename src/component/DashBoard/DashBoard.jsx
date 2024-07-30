@@ -28,7 +28,6 @@ const Dashboard = () => {
                         Authorization: `Bearer ${token}` // Include JWT token in the request headers
                     }
                 })
-                console.log(response.data)
                 setTitles(response.data)
             } catch (error) {
                 console.error('Error fetching titles:', error)
@@ -147,22 +146,23 @@ const Dashboard = () => {
                             <div className="dashboard__list-container">
                                 <ol type="1" className="dashboard__itinerary-list">
                                     {titles.map((title, index) => (
-                                        <li className="dashboard__items" 
+                                        <label className="dashboard__items" 
                                             key={title.recommendation_id}>
-
                                             {showCheckboxes && (
-                                                <input
-                                                    type="checkbox"
-                                                    className="dashboard__checkbox"
-                                                    onChange={() => handleCheckboxChange(title.recommendation_id)}
-                                                    checked={selectedItineraries.includes(title.recommendation_id)}
+                                               
+                                                    <input
+                                                        type="checkbox"
+                                                        className="dashboard__checkbox"
+                                                        onChange={() => handleCheckboxChange(title.recommendation_id)}
+                                                        checked={selectedItineraries.includes(title.recommendation_id)}
                                                     />
+
                                                 )}
                                             <IconWithNumber number={index + 1}/>
                                             <div className="dashboard__item-content" onClick={() => handleTitleClick(title.recommendation_id)}>
                                                 <strong>{title.title}</strong>
                                             </div>
-                                        </li>
+                                        </label>
                                     ))}
                                 </ol>
                             </div>

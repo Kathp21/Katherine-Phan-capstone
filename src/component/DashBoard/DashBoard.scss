@@ -73,7 +73,6 @@
   }
 
   &__list-container {
-    // background-color:#e6e9f9;
     border-radius: $btn-border-radius;
   }
 
@@ -88,5 +87,10 @@
 
   &__checkbox {
     margin-right: 10px;
+    cursor: pointer;
+
+    @include tablet {
+      margin-right: 15px;
+    }
   }
 }
