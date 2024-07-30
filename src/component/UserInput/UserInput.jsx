@@ -39,6 +39,7 @@ function UserInput(props) {
     const handleFormSubmit = (e) => {
         e.preventDefault()
         navigate('/recommendations')
+        localStorage.removeItem('isSave')
         addUserInput(e)
     }
 

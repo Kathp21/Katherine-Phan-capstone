@@ -21,14 +21,12 @@ const Layout = () => {
       bodyClassList.remove('background-image')
     
     } else {
-      console.log('Applying background image class')
       bodyClassList.add('background-image')
       bodyClassList.remove('background-color')
     }
 
     // Cleanup function to reset styles
     return () => {
-      console.log('Removing background classes')
       bodyClassList.remove('background-color')
       bodyClassList.remove('background-image')
     };

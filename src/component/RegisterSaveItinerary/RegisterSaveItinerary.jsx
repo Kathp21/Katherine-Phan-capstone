@@ -12,10 +12,10 @@ import { faEyeSlash, faLock, faUser, faEnvelope } from '@fortawesome/free-solid-
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-export default function RegisterSaveItinerary({ itineraryData }) {
+export default function RegisterSaveItinerary({ itineraryData, newItineraryGenerated }) {
     const userRef = useRef(null)
     const errRef = useRef(null)
-    const { isLoggedIn, login} = useAuth()
+    const { isLoggedIn, login } = useAuth()
 
     const { REACT_APP_API_BASE_PATH } = process.env
     const [ signUpData, setSignUpData ] = useState({
@@ -33,7 +33,17 @@ export default function RegisterSaveItinerary({ itineraryData }) {
 
     const [ errMsg, setErrMsg ] = useState('')
     const [ showPassword, setShowPassword ] = useState('')
-    const [ isSave, setIsSave ] = useState(false)
+    const [ isSave, setIsSave ] = useState(() => {
+        const savedValue = localStorage.getItem('isSave')
+        console.log('Initial load isSave from localStorage:', savedValue);
+
+        return savedValue !== null ? JSON.parse(savedValue) : false
+    })
+
+    useEffect(() => {
+        console.log('Persisting isSave to localStorage:', isSave)
+        localStorage.setItem('isSave', JSON.stringify(isSave))
+    },[isSave])
 
     useEffect(() => {
         if (userRef.current) {
@@ -69,13 +79,9 @@ export default function RegisterSaveItinerary({ itineraryData }) {
         // ADD USER TO DATABASE
         try{ 
             const signUpRes = await axios.post(`${REACT_APP_API_BASE_PATH}/api/users/register`, signUpData)
-            console.log(signUpData)
-            console.log(signUpRes)
 
         // Assuming the server responds with a JWT token on successful registration
         const { token, user } = signUpRes.data;
-
-        console.log("Itinerary Data to Save:", itineraryData)
 
         localStorage.setItem('authToken', token)
         login(token, user)
@@ -105,7 +111,7 @@ export default function RegisterSaveItinerary({ itineraryData }) {
         if (signInResponse.status === 201) {
             const userData = signInResponse.data.user
             localStorage.setItem('userData', JSON.stringify(userData))
-            // setShowSaveButton(true)
+            // navigate('/dashboard')
         } else {
             setErrMsg('Sign-in failed. Please check your credentials.');
             // Optionally, you can clear the form fields to allow the user to try again
@@ -130,6 +136,13 @@ export default function RegisterSaveItinerary({ itineraryData }) {
     }
 
     const handleSaveItineraryButton = async () => {
+
+        if (isSave) {
+            console.log("Itinerary already saved.");
+            return
+        }
+
+
         const token = localStorage.getItem('authToken')
         try{
             const itineraries = await axios.post(`${REACT_APP_API_BASE_PATH}/api/itineraries/save-itinerary`, itineraryData, {
@@ -151,14 +164,18 @@ export default function RegisterSaveItinerary({ itineraryData }) {
     return (
         <> 
             {isLoggedIn ? (
+               
+ 
                 <section className='save-itinerary__button'>
                     <Button 
-                        type='submit' 
+                        type='button' 
                         buttonText={isSave ? 'Saved' : 'Save'}
-                        variant='button__save-itinerary'
+                        variant='button'
                         onClick={handleSaveItineraryButton}
+                        disabled={isSave} 
                     />
                 </section>
+                
             ) : (
                 <section className='register-save-itinerary'>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
