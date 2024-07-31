@@ -12,7 +12,7 @@ import { faEyeSlash, faLock, faUser, faEnvelope } from '@fortawesome/free-solid-
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-export default function RegisterSaveItinerary({ itineraryData, newItineraryGenerated }) {
+export default function RegisterSaveItinerary({ itineraryData }) {
     const userRef = useRef(null)
     const errRef = useRef(null)
     const { isLoggedIn, login } = useAuth()
