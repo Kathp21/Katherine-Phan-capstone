@@ -10,6 +10,7 @@ button {
     width: 4.5rem;
     font-size: 0.75rem;
     font-weight: 500;
+    cursor: pointer;
 
     @include tablet {
         width: 6rem;
@@ -25,13 +26,10 @@ button {
     width: 9rem;
     font-size: 0.813rem;
     font-weight: 600;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
 
     &:hover {
-        background-color: rgb(22, 41, 111);
-        box-shadow: 0px 15px 20px rgba(22, 41, 111, 0.4);
+        background-color: $graphite;
         color: $white;
-        transform: translateY(-7px);
       }
 }
 
