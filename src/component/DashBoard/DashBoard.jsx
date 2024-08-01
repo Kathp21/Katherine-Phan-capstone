@@ -6,7 +6,7 @@ import axios from "axios";
 import Button from "../Button/Button";
 import IconWithNumber from "../IconWithNumber/IconWithNumber";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 
 
 const Dashboard = () => {
@@ -21,6 +21,7 @@ const Dashboard = () => {
     const { REACT_APP_API_BASE_PATH } = process.env
 
     useEffect(() => {
+
         const fetchItineraryTitle = async (token) => {
             try {
                 const response = await axios.get(`${REACT_APP_API_BASE_PATH}/api/users/itinerary-title`, {
@@ -64,16 +65,15 @@ const Dashboard = () => {
         navigate(`/${recommendation_id}`);
     }
 
-    const handleTrashCanClick = async () => {
-        if(showCheckboxes) {
-            //If checkboxes are shown, delete selected itineraries
-            await handleDelete()
+    const handleEditIcon = (event) => {
+        event.preventDefault()
+        setShowCheckboxes(prevShowCheckboxes => !prevShowCheckboxes)
+    }
 
-            // Hide checkboxes after deletion
-            setShowCheckboxes(false);
-        } else {
-            //Otherwise, show checkboxes
-            setShowCheckboxes(true)
+    const handleTrashCanClick = async (event) => {
+        event.preventDefault()
+        if(showCheckboxes) {
+            await handleDelete()
         }
     }
 
@@ -115,7 +115,8 @@ const Dashboard = () => {
         }
     }
 
-    const handleLogout = async () => {
+    const handleLogout = async (event) => {
+        event.preventDefault()
         setError('')
 
         try {
@@ -141,7 +142,21 @@ const Dashboard = () => {
                         <div>
                             <div className="dashboard__header-container">
                                 <h3>Your Itineraries:</h3>
-                                <FontAwesomeIcon icon={faTrashCan} onClick={handleTrashCanClick}/>
+                                <div className="dashboard__icon-container">
+                                    {showCheckboxes && (
+                                        <FontAwesomeIcon 
+                                            icon = {faTrashCan}
+                                            onClick={handleTrashCanClick}
+                                            className="dashboard__icon"
+                                        />
+                                    )}
+                                    <FontAwesomeIcon 
+                                        icon={faPenToSquare} 
+                                        onClick={handleEditIcon}
+                                        className="dashboard__icon"
+                                    />
+
+                                </div>
                             </div>
                             <div className="dashboard__list-container">
                                 <ol type="1" className="dashboard__itinerary-list">
