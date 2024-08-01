@@ -10,8 +10,8 @@ import { faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 
 
 const Dashboard = () => {
-    const [error, setError] = useState('')
-    const [userData, setUserData] = useState(null)
+    const [ error, setError ] = useState('')
+    const [ userData, setUserData ] = useState(null)
     const [ titles, setTitles ] = useState(null)
     const [ showCheckboxes, setShowCheckboxes ] = useState(false)
     const [ selectedItineraries, setSelectedItineraries ] = useState([])
@@ -32,8 +32,7 @@ const Dashboard = () => {
                 setTitles(response.data)
             } catch (error) {
                 console.error('Error fetching titles:', error)
-
-            }
+            } 
         }
 
         const fetchUserData = async (token) => {
@@ -132,62 +131,74 @@ const Dashboard = () => {
             <div className="dashboard__card">
                 <div className="dashboard__card-body">
                     {error && <div className="dashboard__alert dashboard__alert--danger">{error}</div>}
-                    {userData && (
+                    {userData ? (
                         <div className="dashboard__username">
                             Welcome back {userData?.first_name}!
                         </div>
+                    ) : (
+                        <div className="dashboard__username-placeholder">
+                            &nbsp;
+                        </div>
                     )}
-                    
-                    {titles && titles.length > 0 ? (
-                        <div>
-                            <div className="dashboard__header-container">
-                                <h3>Your Itineraries:</h3>
-                                <div className="dashboard__icon-container">
-                                    {showCheckboxes && (
+
+                    {titles ? (
+
+                        titles.length > 0 ? (
+                            <div>
+                                <div className="dashboard__header-container">
+                                    <h3>Your Itineraries:</h3>
+                                    <div className="dashboard__icon-container">
+                                        {showCheckboxes && (
+                                            <FontAwesomeIcon 
+                                                icon = {faTrashCan}
+                                                onClick={handleTrashCanClick}
+                                                className="dashboard__icon"
+                                            />
+                                        )}
                                         <FontAwesomeIcon 
-                                            icon = {faTrashCan}
-                                            onClick={handleTrashCanClick}
+                                            icon={faPenToSquare} 
+                                            onClick={handleEditIcon}
                                             className="dashboard__icon"
                                         />
-                                    )}
-                                    <FontAwesomeIcon 
-                                        icon={faPenToSquare} 
-                                        onClick={handleEditIcon}
-                                        className="dashboard__icon"
-                                    />
 
+                                    </div>
+                                </div>
+                                <div className="dashboard__list-container">
+                                    <ol type="1" className="dashboard__itinerary-list">
+                                        {titles.map((title, index) => (
+                                            <label className="dashboard__items" 
+                                                key={title.recommendation_id}>
+                                                {showCheckboxes && (
+                                                
+                                                        <input
+                                                            type="checkbox"
+                                                            className="dashboard__checkbox"
+                                                            onChange={() => handleCheckboxChange(title.recommendation_id)}
+                                                            checked={selectedItineraries.includes(title.recommendation_id)}
+                                                        />
+
+                                                    )}
+                                                <IconWithNumber number={index + 1}/>
+                                                <div className="dashboard__item-content" onClick={() => handleTitleClick(title.recommendation_id)}>
+                                                    <strong>{title.title}</strong>
+                                                </div>
+                                            </label>
+                                        ))}
+                                    </ol>
                                 </div>
                             </div>
-                            <div className="dashboard__list-container">
-                                <ol type="1" className="dashboard__itinerary-list">
-                                    {titles.map((title, index) => (
-                                        <label className="dashboard__items" 
-                                            key={title.recommendation_id}>
-                                            {showCheckboxes && (
-                                               
-                                                    <input
-                                                        type="checkbox"
-                                                        className="dashboard__checkbox"
-                                                        onChange={() => handleCheckboxChange(title.recommendation_id)}
-                                                        checked={selectedItineraries.includes(title.recommendation_id)}
-                                                    />
-
-                                                )}
-                                            <IconWithNumber number={index + 1}/>
-                                            <div className="dashboard__item-content" onClick={() => handleTitleClick(title.recommendation_id)}>
-                                                <strong>{title.title}</strong>
-                                            </div>
-                                        </label>
-                                    ))}
-                                </ol>
-                            </div>
-                        </div>
                     ) : (
                         <div>
                             <h3>Your Itineraries:</h3>
                             <p>No itineraries saved in your account.</p>
                         </div>
+                    )
+                    ) : (
+                        <div className="dashboard__itineraries-placeholder">
+                            &nbsp;
+                        </div>
                     )}
+
                 </div>
             </div>
             <div className="dashboard__button-container">
@@ -199,7 +210,7 @@ const Dashboard = () => {
                 />
             </div>
         </section>
-    );
-};
+    )
+}
 
 export default Dashboard
