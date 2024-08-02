@@ -6,7 +6,7 @@ import axios from "axios";
 import Button from "../Button/Button";
 import IconWithNumber from "../IconWithNumber/IconWithNumber";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan, faPenToSquare, faSave, faPen} from '@fortawesome/free-solid-svg-icons'
 
 
 const Dashboard = () => {
@@ -14,7 +14,10 @@ const Dashboard = () => {
     const [ userData, setUserData ] = useState(null)
     const [ titles, setTitles ] = useState(null)
     const [ showCheckboxes, setShowCheckboxes ] = useState(false)
+    const [ showEditTitleIcon, setShowEditTitleIcon ] = useState(false)
     const [ selectedItineraries, setSelectedItineraries ] = useState([])
+    const [ newTitle, setNewTitle ] = useState('')
+    const [ editMode, setEditMode ] = useState(null)
 
     const { logout, isLoggedIn } = useAuth()
     const navigate = useNavigate()
@@ -67,6 +70,35 @@ const Dashboard = () => {
     const handleEditIcon = (event) => {
         event.preventDefault()
         setShowCheckboxes(prevShowCheckboxes => !prevShowCheckboxes)
+        setShowEditTitleIcon(prevShowEditTitleIcon => !prevShowEditTitleIcon)
+    }
+
+    const handleEditTitle = (recommendation_id, currentTitle) => {
+        setEditMode(recommendation_id)
+        setNewTitle(currentTitle)
+    }
+
+    const handleSaveIcon = async (recommendation_id) => {
+        try {
+            const token = localStorage.getItem('authToken')
+            await axios.put(`${REACT_APP_API_BASE_PATH}/api/itineraries/${recommendation_id}`,
+            { title : newTitle},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}` // Include JWT token in the request headers
+                }
+            })
+
+            setTitles(titles.map(title => 
+                title.recommendation_id === recommendation_id ? {...title, title: newTitle} : title
+            ))
+
+            setEditMode(null)
+            setNewTitle('')
+        } catch (error) {
+            console.error('Error updating title:', error);
+            setError('Failed to update title.');
+        }
     }
 
     const handleTrashCanClick = async (event) => {
@@ -179,9 +211,41 @@ const Dashboard = () => {
 
                                                     )}
                                                 <IconWithNumber number={index + 1}/>
-                                                <div className="dashboard__item-content" onClick={() => handleTitleClick(title.recommendation_id)}>
+                                                {/* <div className="dashboard__item-content" onClick={() => handleTitleClick(title.recommendation_id)}>
                                                     <strong>{title.title}</strong>
+                                                </div> */}
+                                                {editMode === title.recommendation_id ? (
+                                                <div className="dashboard__item-content">
+                                                    <div className="dashboard__item-input-container">
+                                                        <input 
+                                                            type="text" 
+                                                            value={newTitle} 
+                                                            onChange={(e) => setNewTitle(e.target.value)} 
+                                                            className="dashboard__input"
+                                                        />
+                                                        <FontAwesomeIcon 
+                                                            icon={faSave} 
+                                                            onClick={() => handleSaveIcon(title.recommendation_id)} 
+                                                            className="dashboard__icon" 
+                                                        />
+                                                    </div>
                                                 </div>
+                                            ) : (
+                                                <div className="dashboard__item-content">
+                                                    <div className="dashboard__item-input-container">
+                                                        <strong onClick={() => handleTitleClick(title.recommendation_id)}>{title.title}</strong>
+                                                        {showEditTitleIcon && (
+                                                            <FontAwesomeIcon 
+                                                            icon={faPen} 
+                                                            onClick={() => handleEditTitle(title.recommendation_id, title.title)} 
+                                                            className="dashboard__icon" 
+                                                            />
+                                                        )}
+
+                                                    </div>
+
+                                                </div>
+                                            )}
                                             </label>
                                         ))}
                                     </ol>
