@@ -29,7 +29,6 @@ function App() {
     try {
       setInput(null)
       let newInput = await axios.post(url, userInput)
-      console.log(newInput)
       setInput(newInput.data)
     } catch(error) {
       console.error(error)

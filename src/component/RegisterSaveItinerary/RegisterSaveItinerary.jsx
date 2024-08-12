@@ -35,13 +35,11 @@ export default function RegisterSaveItinerary({ itineraryData }) {
     const [ showPassword, setShowPassword ] = useState('')
     const [ isSave, setIsSave ] = useState(() => {
         const savedValue = localStorage.getItem('isSave')
-        console.log('Initial load isSave from localStorage:', savedValue);
 
         return savedValue !== null ? JSON.parse(savedValue) : false
     })
 
     useEffect(() => {
-        console.log('Persisting isSave to localStorage:', isSave)
         localStorage.setItem('isSave', JSON.stringify(isSave))
     },[isSave])
 
@@ -145,12 +143,12 @@ export default function RegisterSaveItinerary({ itineraryData }) {
 
         const token = localStorage.getItem('authToken')
         try{
-            const itineraries = await axios.post(`${REACT_APP_API_BASE_PATH}/api/itineraries/save-itinerary`, itineraryData, {
+            await axios.post(`${REACT_APP_API_BASE_PATH}/api/itineraries/save-itinerary`, itineraryData, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-            console.log('Itinerary saved successfully:', itineraries.data ) 
+ 
             setIsSave(true)
         } catch (error) {
             console.error('Error saving itinerary:', error.response ? error.response.data : error.message);
